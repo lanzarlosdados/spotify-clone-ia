@@ -16,3 +16,6 @@ Este es un clon simplificado de Spotify, creado para experimentar con herramient
 
 ## Nota
 Este proyecto es solo para fines educativos y de experimentación. No guarda relación con Spotify AB ni utiliza marcas registradas con fines comerciales.
+
+## Probando workflow
+Workflow de prueba para ver si funciona el workflow de GitHub.
