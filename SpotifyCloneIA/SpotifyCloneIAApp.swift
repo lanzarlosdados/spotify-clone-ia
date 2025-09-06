@@ -11,7 +11,6 @@ import SwiftUI
 struct SpotifyCloneIAApp: App {
     var body: some Scene {
         WindowGroup {
-            // Debug log: App launched, showing Figma-based splash screen
             SplashScreenView()
         }
     }
