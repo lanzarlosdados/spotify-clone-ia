@@ -73,7 +73,6 @@ struct LoginView: View {
     // MARK: - Buttons Section
     private var buttonsSection: some View {
         VStack(spacing: buttonSpacing) {
-            // Primary CTA - Sign up free
             CTAButton(
                 title: "Sign up free",
                 type: .primary,
@@ -106,7 +105,6 @@ struct LoginView: View {
                 handleAppleLogin()
             }
             
-            // Log in button
             CTAButton(
                 title: "Log in",
                 type: .secondary,
