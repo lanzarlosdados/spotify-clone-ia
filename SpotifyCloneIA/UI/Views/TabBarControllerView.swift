@@ -38,19 +38,40 @@ struct TabBarControllerView: View {
     /// Vista de contenido que cambia según el tab seleccionado
     @ViewBuilder
     private var contentView: some View {
+        switch tabBarViewModel.selectedTab {
+        case .home:
+            homeContent
+        case .search:
+            searchContentScrollable
+        case .library:
+            libraryContentScrollable
+        }
+    }
+    
+    // MARK: - Scrollable Content Views
+    /// Contenido scrollable para Search
+    private var searchContentScrollable: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 Spacer()
                     .frame(height: contentPadding.top)
                 
-                switch tabBarViewModel.selectedTab {
-                case .home:
-                    homeContent
-                case .search:
-                    searchContent
-                case .library:
-                    libraryContent
-                }
+                searchContent
+                
+                Spacer()
+                    .frame(height: contentPadding.bottom)
+            }
+        }
+    }
+    
+    /// Contenido scrollable para Library
+    private var libraryContentScrollable: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                Spacer()
+                    .frame(height: contentPadding.top)
+                
+                libraryContent
                 
                 Spacer()
                     .frame(height: contentPadding.bottom)
@@ -61,24 +82,13 @@ struct TabBarControllerView: View {
     // MARK: - Tab Content Views
     /// Contenido del tab Home
     private var homeContent: some View {
-        VStack(spacing: 20) {
-            Text("🏠 Home")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
+        ZStack(alignment: .top) {
+            // MARK: - Scrollable Content Area
+            HomeView()
             
-            Text("Bienvenido a Spotify Clone")
-                .font(.title2)
-                .foregroundColor(.subtitleText)
-                .multilineTextAlignment(.center)
-            
-            // Debug info
-            Text("Tab activo: \(tabBarViewModel.selectedTab.rawValue)")
-                .font(.caption)
-                .foregroundColor(.subtitleText)
-                .padding(.top, 20)
+            // MARK: - Fixed Header Section (Component 1)
+            HomeHeaderView()
         }
-        .padding(.horizontal, 20)
     }
     
     /// Contenido del tab Search
@@ -96,7 +106,7 @@ struct TabBarControllerView: View {
             
             // Placeholder para barra de búsqueda
             RoundedRectangle(cornerRadius: 8)
-                .fill(.overlayBackground)
+                .fill(Color.overlayBackground)
                 .frame(height: 50)
                 .overlay(
                     HStack {
@@ -137,7 +147,7 @@ struct TabBarControllerView: View {
                 ForEach(0..<3, id: \.self) { index in
                     HStack {
                         RoundedRectangle(cornerRadius: 4)
-                            .fill(.overlayBackground)
+                            .fill(Color.overlayBackground)
                             .frame(width: 50, height: 50)
                         
                         VStack(alignment: .leading, spacing: 4) {
