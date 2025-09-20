@@ -12,7 +12,6 @@ struct HomeView: View {
                 
                 TopMixesView()
 
-                // Spacer for the bottom tab bar
                 Spacer()
                     .frame(height: 151)
             }
