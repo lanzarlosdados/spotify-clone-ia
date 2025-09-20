@@ -26,7 +26,7 @@ struct CardSlimView: View {
             Spacer()
         }
         .frame(height: cardHeight)
-        .background(Color.background)
+        .background(Color.surfaceSecondary)
         .cornerRadius(cornerRadius)
     }
     
@@ -60,7 +60,7 @@ struct CardSlimView: View {
 // MARK: - Preview
 #Preview {
     let mockVM = CardSlimViewModel(
-        imageName: "Avatar",
+        imageName: "card-slim-1",
         title: "OK Computer",
         showNotification: true
     )
