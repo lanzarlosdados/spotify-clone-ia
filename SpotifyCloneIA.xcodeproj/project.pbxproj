@@ -29,9 +29,32 @@
 		06C924312E647CBC00BD8D1F /* SpotifyCloneIAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotifyCloneIAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		06A3D5022E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIATests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				UI/Views/Library/LibraryView.swift,
+				UI/Views/Search/SearchView.swift,
+			);
+			target = 06C924262E647CBC00BD8D1F /* SpotifyCloneIATests */;
+		};
+		06A3D5032E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIAUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				UI/Views/Library/LibraryView.swift,
+				UI/Views/Search/SearchView.swift,
+			);
+			target = 06C924302E647CBC00BD8D1F /* SpotifyCloneIAUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		06C9241C2E647CB900BD8D1F /* SpotifyCloneIA */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				06A3D5022E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIATests" target */,
+				06A3D5032E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIAUITests" target */,
+			);
 			path = SpotifyCloneIA;
 			sourceTree = "<group>";
 		};
