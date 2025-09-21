@@ -5,7 +5,7 @@ struct TopMixesView: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Your top mixes")
                 .font(.custom("CircularStd-Bold", size: 22))
-                .foregroundColor(.white)
+                .foregroundColor(.textPrimary)
                 .padding(.horizontal, 16)
 
             ScrollView(.horizontal, showsIndicators: false) {

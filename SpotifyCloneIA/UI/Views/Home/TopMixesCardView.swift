@@ -15,14 +15,14 @@ struct TopMixesCardView: View {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.custom("CircularStd-Medium", size: 12))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.textPrimary)
 
                 Text(description)
                     .font(.custom("CircularStd-Book", size: 12))
-                    .foregroundColor(Color(hex: "#B3B3B3"))
+                    .foregroundColor(Color.textSecondary)
             }
         }
-        .frame(width: 147)
+        .frame(width: 147,height: 206)
     }
 }
 
