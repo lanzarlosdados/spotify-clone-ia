@@ -4,8 +4,7 @@ struct HomeView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 32) {
-                HomeHeaderView()
-
+                
                 HomeContentGridView()
 
                 RecommendedCardView()

@@ -9,13 +9,11 @@ struct TabBarControllerView: View {
     let tabBarViewModel: TabBarViewModel
     
     // MARK: - Constants
-    private let screenWidth: CGFloat = 390
-    private let screenHeight: CGFloat = 844
     private let contentPadding: (top: CGFloat, bottom: CGFloat) = (120, 151)
     
     // MARK: - Body
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { _ in
             ZStack {
                 // MARK: - Background
                 backgroundColor
@@ -31,7 +29,7 @@ struct TabBarControllerView: View {
                 }
             }
         }
-        .frame(width: screenWidth, height: screenHeight)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     // MARK: - Content Views
@@ -83,11 +81,7 @@ struct TabBarControllerView: View {
     /// Contenido del tab Home
     private var homeContent: some View {
         ZStack(alignment: .top) {
-            // MARK: - Scrollable Content Area
             HomeView()
-            
-            // MARK: - Fixed Header Section (Component 1)
-            HomeHeaderView()
         }
     }
     

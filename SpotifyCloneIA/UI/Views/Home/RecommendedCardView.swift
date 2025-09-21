@@ -13,10 +13,10 @@ struct RecommendedCardView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("New release from")
                         .font(.custom("CircularStd-Book", size: 12))
-                        .foregroundColor(Color(hex: "#B3B3B3"))
+                        .foregroundColor(Color.textSecondary)
                     Text("Arctic Monkeys")
                         .font(.custom("CircularStd-Bold", size: 22))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.textPrimary)
                         .kerning(-0.55)
                 }
                 Spacer()
@@ -25,9 +25,6 @@ struct RecommendedCardView: View {
             // MARK: - Card
             HStack(spacing: 16) {
                 // MARK: - TODO
-                // Set a fixed width for the card to prevent it from expanding horizontally.
-                // The Spacer inside the nested VStack was causing the layout to stretch.
-                // A width of 320 provides a balanced and visually appealing size.
 
                 Image("album_art")
                     .resizable()
@@ -37,10 +34,10 @@ struct RecommendedCardView: View {
                     VStack(alignment: .leading) {
                         Text("I Wanna Be Yours")
                             .font(.custom("CircularStd-Bold", size: 12))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.textPrimary)
                         Text("Single • Arctic Monkeys")
                             .font(.custom("CircularStd-Book", size: 12))
-                            .foregroundColor(Color(hex: "#DEDEDE"))
+                            .foregroundColor(Color.textTertiary)
                     }
                     
                     Spacer()
@@ -49,7 +46,7 @@ struct RecommendedCardView: View {
                         Image("plus_circle")
                             .resizable()
                             .frame(width: 24, height: 24)
-                        
+                            .clipShape(Circle())
                         Spacer()
                         
                         Button(action: {
@@ -57,11 +54,7 @@ struct RecommendedCardView: View {
                         }) {
                             Image("play_icon")
                                 .resizable()
-                                .renderingMode(.template)
-                                .frame(width: 15, height: 15)
-                                .foregroundColor(Color(hex: "#121212"))
-                                .padding(8)
-                                .background(Color.white)
+                                .frame(width: 32, height: 32)
                                 .clipShape(Circle())
                         }
                     }
@@ -70,7 +63,7 @@ struct RecommendedCardView: View {
                 .padding(.vertical, 16)
             }
             .frame(height: 142)
-            .background(Color(hex: "#292929"))
+            .background(Color.surfaceSecondary)
             .cornerRadius(8)
         }
         .padding(.horizontal, 16)
@@ -88,30 +81,3 @@ struct RecommendedCardView_Previews: PreviewProvider {
     }
 }
 #endif
-
-// Extension to allow using hex colors
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (255, 0, 0, 0)
-        }
-        self.init(
-            .sRGB, 
-            red: Double(r) / 255, 
-            green: Double(g) / 255, 
-            blue: Double(b) / 255, 
-            opacity: Double(a) / 255
-        )
-    }
-}
