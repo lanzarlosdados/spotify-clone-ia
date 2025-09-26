@@ -11,6 +11,9 @@ struct HorizontalCardView: View {
     let cardSize: CGSize
     let showDescription: Bool
     
+    // Espaciado entre imagen y textos
+    private let contentSpacing: CGFloat = 8
+    
     // Init con valores por defecto para no romper llamadas existentes
     init(
         imageName: String,
@@ -29,16 +32,19 @@ struct HorizontalCardView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: contentSpacing) {
             Image(imageName)
                 .resizable()
                 .frame(width: imageSize.width, height: imageSize.height)
                 .cornerRadius(4)
 
-            VStack(alignment: .leading) {
+            // Contenedor de texto que ocupa el resto del alto disponible
+            VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .font(.custom("CircularStd-Medium", size: 12))
                     .foregroundColor(Color.textPrimary)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
 
                 if showDescription && !description.isEmpty {
                     Text(description)
@@ -46,6 +52,7 @@ struct HorizontalCardView: View {
                         .foregroundColor(Color.textSecondary)
                 }
             }
+            .frame(maxHeight: .infinity, alignment: .topLeading)
         }
         .frame(width: cardSize.width, height: cardSize.height)
     }
@@ -67,13 +74,13 @@ struct HorizontalCardView_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
             .previewLayout(.sizeThatFits)
             
-            // Personalizado con tamaños y ocultando descripción
+            // Caso Recently played: 94x132, sin descripción
             HorizontalCardView(
-                imageName: "rock-mix",
-                title: "Rock Mix",
-                description: "Blur, The Killers, Kula Shaker and more",
-                imageSize: .init(width: 160, height: 160),
-                cardSize: .init(width: 160, height: 220),
+                imageName: "the-cure",
+                title: "The Cure",
+                description: "",
+                imageSize: .init(width: 94, height: 94),
+                cardSize: .init(width: 94, height: 132),
                 showDescription: false
             )
             .preferredColorScheme(.dark)

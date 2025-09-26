@@ -5,6 +5,16 @@ struct HorizontalCardItem: Identifiable, Equatable {
     let imageName: String
     let title: String
     let description: String
+    
+    init(
+        imageName: String,
+        title: String,
+        description: String
+    ) {
+        self.imageName = imageName
+        self.title = title
+        self.description = description
+    }
 }
 
 struct HorizontalCardsSectionView: View {
@@ -19,6 +29,11 @@ struct HorizontalCardsSectionView: View {
     let showsIndicators: Bool
     let onSelect: (HorizontalCardItem) -> Void
     
+    // Configuración para cada tarjeta
+    let cardImageSize: CGSize
+    let cardSize: CGSize
+    let showItemDescription: Bool
+    
     // MARK: - Inits
     
     init(
@@ -29,6 +44,9 @@ struct HorizontalCardsSectionView: View {
         horizontalPadding: CGFloat = 16,
         verticalPadding: CGFloat = 8,
         showsIndicators: Bool = false,
+        cardImageSize: CGSize = .init(width: 147, height: 147),
+        cardSize: CGSize = .init(width: 147, height: 206),
+        showItemDescription: Bool = true,
         onSelect: @escaping (HorizontalCardItem) -> Void = { _ in }
     ) {
         self.title = title
@@ -38,6 +56,9 @@ struct HorizontalCardsSectionView: View {
         self.horizontalPadding = horizontalPadding
         self.verticalPadding = verticalPadding
         self.showsIndicators = showsIndicators
+        self.cardImageSize = cardImageSize
+        self.cardSize = cardSize
+        self.showItemDescription = showItemDescription
         self.onSelect = onSelect
     }
     
@@ -64,7 +85,10 @@ struct HorizontalCardsSectionView: View {
                         HorizontalCardView(
                             imageName: item.imageName,
                             title: item.title,
-                            description: item.description
+                            description: item.description,
+                            imageSize: cardImageSize,
+                            cardSize: cardSize,
+                            showDescription: showItemDescription
                         )
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -107,6 +131,9 @@ struct HorizontalCardsSectionView_Previews: PreviewProvider {
                 horizontalPadding: 20,
                 verticalPadding: 8,
                 showsIndicators: false,
+                cardImageSize: .init(width: 120, height: 120),
+                cardSize: .init(width: 140, height: 200),
+                showItemDescription: false,
                 onSelect: { item in
                     print("👆 Tapped on: \(item.title)")
                 }
