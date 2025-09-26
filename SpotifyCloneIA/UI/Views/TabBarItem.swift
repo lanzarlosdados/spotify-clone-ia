@@ -16,6 +16,8 @@ struct TabBarItem: View {
             // MARK: - Icon
             Image(tab.selectedIcon)
                 .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(.white)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: iconSize, height: iconSize)
             

@@ -30,6 +30,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		06372ABB2E87036000E9BEA9 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIA" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 06C924192E647CB900BD8D1F /* SpotifyCloneIA */;
+		};
 		06A3D5022E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIATests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -52,6 +59,7 @@
 		06C9241C2E647CB900BD8D1F /* SpotifyCloneIA */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				06372ABB2E87036000E9BEA9 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIA" target */,
 				06A3D5022E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIATests" target */,
 				06A3D5032E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIAUITests" target */,
 			);
@@ -420,6 +428,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SpotifyCloneIA/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -447,6 +456,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SpotifyCloneIA/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

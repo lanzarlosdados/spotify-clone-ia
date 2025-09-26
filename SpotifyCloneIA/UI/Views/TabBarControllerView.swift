@@ -11,46 +11,32 @@ struct TabBarControllerView: View {
     
     var body: some View {
         TabView(selection: $tabBarViewModel.selectedTab) {
-              NavigationStack() {
-                  HomeView()
-                      .navigationTitle("Home")
-              }
-              .tabItem {
-                  TabBarItem(
-                      tab: .home
-                  )
-              }
-              .tag(TabBarViewModel.TabItem.home)
-              
-              NavigationStack() {
-                  SearchView()
-                      .navigationTitle("Search")
-              }
-              .tabItem {
-                  TabBarItem(
-                      tab: .search
-                  )
-              }
-              .tag(TabBarViewModel.TabItem.search)
-              
-              NavigationStack() {
-                  LibraryView()
-                      .navigationTitle("Your library")
-                  
-              }
-              .tabItem {
-                  TabBarItem(
-                      tab: .library
-                  )
-              }
-              .tag(TabBarViewModel.TabItem.library)
-          }
+            HomeView()
+            .tabItem {
+                TabBarItem(
+                    tab: .home
+                )
+            }
+            .tag(TabBarViewModel.TabItem.home)
+            
+            SearchView()
+            .tabItem {
+                TabBarItem(
+                    tab: .search
+                )
+            }
+            .tag(TabBarViewModel.TabItem.search)
+            
+            LibraryView()
+            .tabItem {
+                TabBarItem(
+                    tab: .library
+                )
+            }
+            .tag(TabBarViewModel.TabItem.library)
+        }
         .tint(.white)
-        .onAppear(perform: {
-            UITabBar.appearance().unselectedItemTintColor = UIColor.unselectedTabItem
-            UITabBar.appearance().backgroundColor = .black.withAlphaComponent(0.4)
-        })
-      }
+    }
 }
 
 // MARK: - Preview
@@ -58,4 +44,3 @@ struct TabBarControllerView: View {
     TabBarControllerView(tabBarViewModel: TabBarViewModel())
         .preferredColorScheme(.dark)
 }
-

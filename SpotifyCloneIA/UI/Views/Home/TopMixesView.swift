@@ -1,44 +1,128 @@
 import SwiftUI
 
-struct TopMixesView: View {
+// Item genérico para un carrusel horizontal de tarjetas
+struct HorizontalCardItem: Identifiable, Equatable {
+    let id = UUID()
+    let imageName: String
+    let title: String
+    let description: String
+}
+
+// Compatibilidad con nombres anteriores
+typealias TopMixItem = HorizontalCardItem
+
+// Vista genérica de sección con carrusel horizontal de tarjetas
+struct HorizontalCardsSectionView: View {
+    
+    // MARK: - Configuración
+    let title: String
+    let items: [HorizontalCardItem]
+    let showTitle: Bool
+    let interItemSpacing: CGFloat
+    let horizontalPadding: CGFloat
+    let verticalPadding: CGFloat
+    let showsIndicators: Bool
+    let onSelect: (HorizontalCardItem) -> Void
+    
+    // MARK: - Inits
+    
+    /// Inicializador principal y reutilizable
+    init(
+        title: String = "Your top mixes",
+        items: [HorizontalCardItem],
+        showTitle: Bool = true,
+        interItemSpacing: CGFloat = 16,
+        horizontalPadding: CGFloat = 16,
+        verticalPadding: CGFloat = 8,
+        showsIndicators: Bool = false,
+        onSelect: @escaping (HorizontalCardItem) -> Void = { _ in }
+    ) {
+        self.title = title
+        self.items = items
+        self.showTitle = showTitle
+        self.interItemSpacing = interItemSpacing
+        self.horizontalPadding = horizontalPadding
+        self.verticalPadding = verticalPadding
+        self.showsIndicators = showsIndicators
+        self.onSelect = onSelect
+    }
+    
+    /// Conveniencia para mantener compatibilidad con llamadas existentes y Previews
+    init() {
+        self.init(
+            title: "Your top mixes",
+            items: HorizontalCardsSectionView.sampleItems
+        )
+    }
+    
+    // MARK: - Body
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Your top mixes")
-                .font(.custom("CircularStd-Bold", size: 22))
-                .foregroundColor(.textPrimary)
-                .padding(.horizontal, 16)
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    TopMixesCardView(
-                        imageName: "rock-mix",
-                        title: "Rock Mix",
-                        description: "Blur, The Killers, Kula Shaker and more"
-                    )
-                    TopMixesCardView(
-                        imageName: "pop-mix",
-                        title: "Pop Mix",
-                        description: "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo"
-                    )
-                    TopMixesCardView(
-                        imageName: "upbeat-mix",
-                        title: "Upbeat Mix",
-                        description: "The Stokes,Chappell Roan, Talking Heads and more"
-                    )
+            if showTitle {
+                Text(title)
+                    .font(.custom("CircularStd-Bold", size: 22))
+                    .foregroundColor(.textPrimary)
+                    .padding(.horizontal, horizontalPadding)
+            }
+            
+            ScrollView(.horizontal, showsIndicators: showsIndicators) {
+                HStack(spacing: interItemSpacing) {
+                    ForEach(items) { item in
+                        HorizontalCardView(
+                            imageName: item.imageName,
+                            title: item.title,
+                            description: item.description
+                        )
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            onSelect(item)
+                        }
+                    }
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, horizontalPadding)
             }
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, verticalPadding)
     }
 }
 
+// Compatibilidad con el nombre anterior de la vista
+typealias TopMixesView = HorizontalCardsSectionView
+
+// MARK: - Mocks
+private extension HorizontalCardsSectionView {
+    static let sampleItems: [HorizontalCardItem] = [
+        HorizontalCardItem(imageName: "rock-mix", title: "Rock Mix", description: "Blur, The Killers, Kula Shaker and more"),
+        HorizontalCardItem(imageName: "pop-mix", title: "Pop Mix", description: "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo"),
+        HorizontalCardItem(imageName: "upbeat-mix", title: "Upbeat Mix", description: "The Stokes, Chappell Roan, Talking Heads and more")
+    ]
+}
+
 #if DEBUG
-struct TopMixesView_Previews: PreviewProvider {
+struct HorizontalCardsSectionView_Previews: PreviewProvider {
     static var previews: some View {
-        TopMixesView()
+        Group {
+            // Preview con init de conveniencia
+            HorizontalCardsSectionView()
+                .preferredColorScheme(.dark)
+                .previewLayout(.sizeThatFits)
+            
+            // Preview con datos inyectados y onSelect
+            HorizontalCardsSectionView(
+                title: "Tus favoritos",
+                items: HorizontalCardsSectionView.sampleItems,
+                showTitle: true,
+                interItemSpacing: 12,
+                horizontalPadding: 20,
+                verticalPadding: 8,
+                showsIndicators: false,
+                onSelect: { item in
+                    print("👆 Tapped on: \(item.title)")
+                }
+            )
             .preferredColorScheme(.dark)
             .previewLayout(.sizeThatFits)
+        }
     }
 }
 #endif

@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct TopMixesCardView: View {
+// Vista genérica de tarjeta para el carrusel horizontal
+struct HorizontalCardView: View {
     let imageName: String
     let title: String
     let description: String
@@ -22,14 +23,17 @@ struct TopMixesCardView: View {
                     .foregroundColor(Color.textSecondary)
             }
         }
-        .frame(width: 147,height: 206)
+        .frame(width: 147, height: 206)
     }
 }
 
+// Compatibilidad con el nombre anterior
+typealias TopMixesCardView = HorizontalCardView
+
 #if DEBUG
-struct TopMixesCardView_Previews: PreviewProvider {
+struct HorizontalCardView_Previews: PreviewProvider {
     static var previews: some View {
-        TopMixesCardView(
+        HorizontalCardView(
             imageName: "rock-mix",
             title: "Rock Mix",
             description: "Blur, The Killers, Kula Shaker and more"
