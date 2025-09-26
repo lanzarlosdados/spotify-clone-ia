@@ -9,7 +9,7 @@ struct HomeView: View {
 
                 RecommendedCardView()
                 
-                TopMixesView()
+                HorizontalCardsSectionView()
 
                 Spacer()
                     .frame(height: 151)

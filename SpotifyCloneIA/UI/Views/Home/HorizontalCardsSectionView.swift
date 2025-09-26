@@ -1,6 +1,5 @@
 import SwiftUI
 
-// Item genérico para un carrusel horizontal de tarjetas
 struct HorizontalCardItem: Identifiable, Equatable {
     let id = UUID()
     let imageName: String
@@ -8,10 +7,6 @@ struct HorizontalCardItem: Identifiable, Equatable {
     let description: String
 }
 
-// Compatibilidad con nombres anteriores
-typealias TopMixItem = HorizontalCardItem
-
-// Vista genérica de sección con carrusel horizontal de tarjetas
 struct HorizontalCardsSectionView: View {
     
     // MARK: - Configuración
@@ -26,7 +21,6 @@ struct HorizontalCardsSectionView: View {
     
     // MARK: - Inits
     
-    /// Inicializador principal y reutilizable
     init(
         title: String = "Your top mixes",
         items: [HorizontalCardItem],
@@ -47,7 +41,6 @@ struct HorizontalCardsSectionView: View {
         self.onSelect = onSelect
     }
     
-    /// Conveniencia para mantener compatibilidad con llamadas existentes y Previews
     init() {
         self.init(
             title: "Your top mixes",
@@ -86,8 +79,6 @@ struct HorizontalCardsSectionView: View {
     }
 }
 
-// Compatibilidad con el nombre anterior de la vista
-typealias TopMixesView = HorizontalCardsSectionView
 
 // MARK: - Mocks
 private extension HorizontalCardsSectionView {
