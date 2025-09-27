@@ -17,7 +17,7 @@ struct HorizontalCardItem: Identifiable, Equatable {
     }
 }
 
-struct HorizontalCardsSectionView: View {
+struct HorizontalCardsSectionView<Header: View>: View {
     
     // MARK: - Configuración
     let title: String
@@ -34,8 +34,13 @@ struct HorizontalCardsSectionView: View {
     let cardSize: CGSize
     let showItemDescription: Bool
     
+    // Header compuesto (no opcional)
+    private let headerContent: () -> Header
+    private let hasCustomHeader: Bool
+    
     // MARK: - Inits
     
+    // Init principal con header inyectable
     init(
         title: String = "Your top mixes",
         items: [HorizontalCardItem],
@@ -47,7 +52,8 @@ struct HorizontalCardsSectionView: View {
         cardImageSize: CGSize = .init(width: 147, height: 147),
         cardSize: CGSize = .init(width: 147, height: 206),
         showItemDescription: Bool = true,
-        onSelect: @escaping (HorizontalCardItem) -> Void = { _ in }
+        onSelect: @escaping (HorizontalCardItem) -> Void = { _ in },
+        @ViewBuilder header: @escaping () -> Header
     ) {
         self.title = title
         self.items = items
@@ -60,19 +66,47 @@ struct HorizontalCardsSectionView: View {
         self.cardSize = cardSize
         self.showItemDescription = showItemDescription
         self.onSelect = onSelect
+        self.headerContent = header
+        self.hasCustomHeader = true
     }
     
-    init() {
-        self.init(
-            title: "Your top mixes",
-            items: HorizontalCardsSectionView.sampleItems
-        )
+    // Conveniencia: sin header custom -> usa Text(title)
+    init(
+        title: String = "Your top mixes",
+        items: [HorizontalCardItem] = HorizontalCardsSectionView.sampleItems,
+        showTitle: Bool = true,
+        interItemSpacing: CGFloat = 16,
+        horizontalPadding: CGFloat = 16,
+        verticalPadding: CGFloat = 8,
+        showsIndicators: Bool = false,
+        cardImageSize: CGSize = .init(width: 147, height: 147),
+        cardSize: CGSize = .init(width: 147, height: 206),
+        showItemDescription: Bool = true,
+        onSelect: @escaping (HorizontalCardItem) -> Void = { _ in }
+    ) where Header == EmptyView {
+        self.title = title
+        self.items = items
+        self.showTitle = showTitle
+        self.interItemSpacing = interItemSpacing
+        self.horizontalPadding = horizontalPadding
+        self.verticalPadding = verticalPadding
+        self.showsIndicators = showsIndicators
+        self.cardImageSize = cardImageSize
+        self.cardSize = cardSize
+        self.showItemDescription = showItemDescription
+        self.onSelect = onSelect
+        self.headerContent = { EmptyView() }
+        self.hasCustomHeader = false
     }
     
     // MARK: - Body
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if showTitle {
+            // Si hay header custom, úsalo; si no, usa el Text(title) existente.
+            if hasCustomHeader {
+                headerContent()
+                    .padding(.horizontal, horizontalPadding)
+            } else if showTitle {
                 Text(title)
                     .font(.custom("CircularStd-Bold", size: 22))
                     .foregroundColor(.textPrimary)
@@ -106,11 +140,13 @@ struct HorizontalCardsSectionView: View {
 
 // MARK: - Mocks
 private extension HorizontalCardsSectionView {
-    static let sampleItems: [HorizontalCardItem] = [
-        HorizontalCardItem(imageName: "rock-mix", title: "Rock Mix", description: "Blur, The Killers, Kula Shaker and more"),
-        HorizontalCardItem(imageName: "pop-mix", title: "Pop Mix", description: "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo"),
-        HorizontalCardItem(imageName: "upbeat-mix", title: "Upbeat Mix", description: "The Stokes, Chappell Roan, Talking Heads and more")
-    ]
+    static var sampleItems: [HorizontalCardItem] {
+        [
+            HorizontalCardItem(imageName: "rock-mix", title: "Rock Mix", description: "Blur, The Killers, Kula Shaker and more"),
+            HorizontalCardItem(imageName: "pop-mix", title: "Pop Mix", description: "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo"),
+            HorizontalCardItem(imageName: "upbeat-mix", title: "Upbeat Mix", description: "The Stokes, Chappell Roan, Talking Heads and more")
+        ]
+    }
 }
 
 #if DEBUG
@@ -118,24 +154,42 @@ struct HorizontalCardsSectionView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             // Preview con init de conveniencia
-            HorizontalCardsSectionView()
+            HorizontalCardsSectionView<EmptyView>()
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
             
-            // Preview con datos inyectados y onSelect
+            // Preview con header compuesto (similar a tus capturas)
             HorizontalCardsSectionView(
-                title: "Tus favoritos",
-                items: HorizontalCardsSectionView.sampleItems,
-                showTitle: true,
+                title: "The Black Dahlia Murder P…",
+                items: HorizontalCardsSectionView<EmptyView>.sampleItems,
+                showTitle: false, // lo maneja el header custom
                 interItemSpacing: 12,
                 horizontalPadding: 20,
                 verticalPadding: 8,
                 showsIndicators: false,
-                cardImageSize: .init(width: 120, height: 120),
-                cardSize: .init(width: 140, height: 200),
-                showItemDescription: false,
+                cardImageSize: .init(width: 147, height: 147),
+                cardSize: .init(width: 147, height: 206),
+                showItemDescription: true,
                 onSelect: { item in
                     print("👆 Tapped on: \(item.title)")
+                },
+                header: {
+                    HStack(spacing: 12) {
+                        Image("episode-one")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(4)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("More like:")
+                                .font(.custom("CircularStd-Book", size: 16))
+                                .foregroundColor(.textSecondary)
+                            Text("The Black Dahlia Murder P…")
+                                .font(.custom("CircularStd-Bold", size: 28))
+                                .foregroundColor(.textPrimary)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                        }
+                    }
                 }
             )
             .preferredColorScheme(.dark)

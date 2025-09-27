@@ -9,6 +9,13 @@ struct HomeView: View {
                 HorizontalCardsSectionView()
                 RecentlyPlayed()
                 EpisodesForYouSectionView()
+
+                MoreLikeSectionView(
+                    referenceImageName: "episode-one",
+                    referenceTitle: "The Black Dahlia Murder P…",
+                    items: MoreLikeSectionView.sampleItems
+                )
+
                 JumpBackInSectionView()
                 RecommendedForTodaySectionView()
                 Spacer()
