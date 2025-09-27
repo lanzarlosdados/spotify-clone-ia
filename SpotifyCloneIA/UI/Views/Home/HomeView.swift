@@ -11,13 +11,17 @@ struct HomeView: View {
                 EpisodesForYouSectionView()
 
                 MoreLikeSectionView(
-                    referenceImageName: "episode-one",
+                    referenceImageName: "solved-murders-mini",
                     referenceTitle: "The Black Dahlia Murder P…",
                     items: MoreLikeSectionView.sampleItems
                 )
 
                 JumpBackInSectionView()
                 RecommendedForTodaySectionView()
+
+                // Componente genérico reutilizable para podcast o video
+                MediaPreviewCardView()
+
                 Spacer()
                     .frame(height: 151)
             }
