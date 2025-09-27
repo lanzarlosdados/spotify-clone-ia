@@ -58,8 +58,6 @@ struct HorizontalCardView: View {
     }
 }
 
-// Compatibilidad con el nombre anterior
-typealias TopMixesCardView = HorizontalCardView
 
 #if DEBUG
 struct HorizontalCardView_Previews: PreviewProvider {
