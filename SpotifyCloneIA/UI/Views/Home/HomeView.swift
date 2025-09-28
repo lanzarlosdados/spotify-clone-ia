@@ -10,22 +10,6 @@ struct HomeView: View {
                 RecentlyPlayed()
                 EpisodesForYouSectionView()
 
-                MoreLikeSectionView(
-                    referenceImageName: "solved-murders-mini",
-                    referenceTitle: "The Black Dahlia Murder P…",
-                    items: MoreLikeSectionView.sampleItems
-                )
-
-                JumpBackInSectionView()
-                RecommendedForTodaySectionView()
-
-                // Nueva vista agregada por encima de TrendingAlbumsForYouSectionView
-                MediaPreviewCardView(
-                    previewButtonTitle: "Preview episode",
-                    kind: .episode
-                )
-
-                TrendingAlbumsForYouSectionView()
 
                 Spacer()
                     .frame(height: 151)
