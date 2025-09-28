@@ -1,4 +1,5 @@
 import Foundation
+import Observation
 
 // MARK: - TabBarViewModel
 /// ViewModel para manejar el estado del TabBar principal
