@@ -19,8 +19,13 @@ struct HomeView: View {
                 JumpBackInSectionView()
                 RecommendedForTodaySectionView()
 
-                // Componente genérico reutilizable para podcast o video
-                MediaPreviewCardView()
+                // Nueva vista agregada por encima de TrendingAlbumsForYouSectionView
+                MediaPreviewCardView(
+                    previewButtonTitle: "Preview episode",
+                    kind: .episode
+                )
+
+                TrendingAlbumsForYouSectionView()
 
                 Spacer()
                     .frame(height: 151)

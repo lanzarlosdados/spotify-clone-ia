@@ -4,6 +4,7 @@ import SwiftUI
 enum MediaKind {
     case episode
     case video
+    case album
 }
 
 struct MediaPreviewCardView: View {
@@ -13,6 +14,7 @@ struct MediaPreviewCardView: View {
     let dateText: String        // Ej: "Sep 2023"
     let durationText: String    // Ej: "46 min"
     let descriptionText: String
+    let previewButtonTitle: String   // Texto dinámico para el botón "Preview"
     
     // MARK: - Assets
     let artworkName: String                 // Portada o thumbnail
@@ -51,6 +53,7 @@ struct MediaPreviewCardView: View {
         dateText: String = "Sep 2023",
         durationText: String = "46 min",
         descriptionText: String = "Elizabeth Short’s gruesome murder is the LAPD’s most infamous unsolved case. But there’s one person who thinks he’s cracked it — the alleged killer’s own son. Today, we reopen the case against Geo…",
+        previewButtonTitle: String = "Preview",
         artworkName: String = "solved-murders-podcast",
         backgroundIllustrationName: String = "equalizer-illu",
         plusIconName: String = "plus_circle",
@@ -67,6 +70,7 @@ struct MediaPreviewCardView: View {
         self.dateText = dateText
         self.durationText = durationText
         self.descriptionText = descriptionText
+        self.previewButtonTitle = previewButtonTitle
         self.artworkName = artworkName
         self.backgroundIllustrationName = backgroundIllustrationName
         self.plusIconName = plusIconName
@@ -129,6 +133,8 @@ struct MediaPreviewCardView: View {
             Button(action: onAdd) {
                 Image(plusIconName)
                     .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.white)
                     .frame(width: 28, height: 28)
             }
         }
@@ -185,7 +191,7 @@ struct MediaPreviewCardView: View {
                         Image(previewIconName)
                             .resizable()
                             .frame(width: 18, height: 18)
-                        Text(kind == .video ? "Preview video" : "Preview episode")
+                        Text(previewButtonTitle)
                             .font(.custom("CircularStd-Bold", size: 14))
                     }
                     .foregroundColor(.textPrimary)
@@ -218,12 +224,26 @@ struct MediaPreviewCardView: View {
     ZStack {
         Color.black.ignoresSafeArea()
         VStack(spacing: 24) {
-            MediaPreviewCardView(kind: .episode)
+            MediaPreviewCardView(
+                previewButtonTitle: "Preview episode",
+                kind: .episode
+            )
             MediaPreviewCardView(
                 title: "Live at the Royal Albert Hall",
                 subtitle: "Video • Arctic Monkeys",
+                previewButtonTitle: "Preview video",
                 artworkName: "solved-murders-podcast",
                 kind: .video
+            )
+            MediaPreviewCardView(
+                title: "Blur (Special Edition)",
+                subtitle: "Album • 32 songs, 2 hr 3 min",
+                dateText: "2024",
+                durationText: "2 hr 3 min",
+                descriptionText: "A special edition packed with remastered tracks and exclusive content.",
+                previewButtonTitle: "Preview album",
+                artworkName: "blur-special-edition",
+                kind: .album
             )
         }
         .padding()
