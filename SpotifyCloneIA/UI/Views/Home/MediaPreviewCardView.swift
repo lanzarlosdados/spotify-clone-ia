@@ -29,6 +29,7 @@ struct MediaPreviewCardView: View {
     var onAdd: () -> Void = {}
     var onPreview: () -> Void = {}
     var onPlay: () -> Void = {}
+    var onMore: () -> Void = {} // NUEVO
     
     // MARK: - Constantes de layout
     private let cornerRadius: CGFloat = 16
@@ -63,7 +64,8 @@ struct MediaPreviewCardView: View {
         kind: MediaKind = .episode,
         onAdd: @escaping () -> Void = {},
         onPreview: @escaping () -> Void = {},
-        onPlay: @escaping () -> Void = {}
+        onPlay: @escaping () -> Void = {},
+        onMore: @escaping () -> Void = {} // NUEVO
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -81,6 +83,7 @@ struct MediaPreviewCardView: View {
         self.onAdd = onAdd
         self.onPreview = onPreview
         self.onPlay = onPlay
+        self.onMore = onMore
     }
     
     var body: some View {
@@ -186,6 +189,7 @@ struct MediaPreviewCardView: View {
             
             // Acciones
             HStack(spacing: 12) {
+                // Preview (flexible)
                 Button(action: onPreview) {
                     HStack(spacing: 8) {
                         Image(previewIconName)
@@ -193,6 +197,8 @@ struct MediaPreviewCardView: View {
                             .frame(width: 18, height: 18)
                         Text(previewButtonTitle)
                             .font(.custom("CircularStd-Bold", size: 14))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.9)
                     }
                     .foregroundColor(.textPrimary)
                     .padding(.horizontal, 14)
@@ -205,15 +211,31 @@ struct MediaPreviewCardView: View {
                             )
                     )
                 }
+                .layoutPriority(0)
                 
-                Spacer()
+                Spacer(minLength: 8)
                 
-                Button(action: onPlay) {
-                    Image(playIconName)
-                        .resizable()
-                        .frame(width: 44, height: 44)
-                        .clipShape(Circle())
+                HStack(spacing: 12) {
+                    Button(action: onMore) {
+                        Image("ico-24-bullet")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                            .frame(width: 18, height: 18)
+                            .frame(width: 44, height: 44)
+                            .background(Color.black.opacity(0.35))
+                            .clipShape(Circle())
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Button(action: onPlay) {
+                        Image(playIconName)
+                            .resizable()
+                            .frame(width: 44, height: 44)
+                            .clipShape(Circle())
+                    }
                 }
+                .layoutPriority(1)
             }
         }
         .padding(.horizontal, horizontalPadding)

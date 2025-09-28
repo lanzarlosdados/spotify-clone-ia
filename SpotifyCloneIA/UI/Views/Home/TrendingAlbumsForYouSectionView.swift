@@ -61,12 +61,13 @@ struct TrendingAlbumsForYouSectionView: View {
             Image(systemName: systemName)
                 .foregroundColor(.white)
                 .font(.system(size: 18, weight: .semibold))
-                .frame(width: 36, height: 36)
+                .frame(width: 44, height: 44) // área táctil 44x44
                 .background(Color.black.opacity(0.35))
                 .clipShape(Circle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(systemName == "chevron.left" ? "Previous" : "Next")
+        .accessibilityHint(systemName == "chevron.left" ? "Go to previous item" : "Go to next item")
     }
 }
 

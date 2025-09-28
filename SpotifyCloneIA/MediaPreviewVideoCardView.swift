@@ -136,6 +136,8 @@ struct MediaPreviewVideoCardView: View {
                         .frame(width: 18, height: 18)
                     Text(previewButtonTitle)
                         .font(.custom("CircularStd-Bold", size: 14))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.9)
                 }
                 .foregroundColor(.textPrimary)
                 .padding(.horizontal, 16)
@@ -149,33 +151,39 @@ struct MediaPreviewVideoCardView: View {
                         )
                 )
             }
+            .layoutPriority(0) // Menor prioridad que el bloque derecho
             
-            Spacer()
+            Spacer(minLength: 8)
             
-            // Botón "más" opcional para coincidir con el mock
-            Button(action: onMore) {
-                Image(systemName: "ellipsis")
-                    .foregroundColor(.white)
-                    .font(.system(size: 18, weight: .semibold))
-                    .frame(width: 44, height: 44)
-                    .background(Color.black.opacity(0.35))
-                    .clipShape(Circle())
+            // Bloque derecho indeformable (More + Play)
+            HStack(spacing: 12) {
+                Button(action: onMore) {
+                    Image("ico-24-bullet")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.white)
+                        .frame(width: 18, height: 18)
+                        .frame(width: 44, height: 44) // área táctil
+                        .background(Color.black.opacity(0.35))
+                        .clipShape(Circle())
+                }
+                .buttonStyle(.plain)
+                
+                Button(action: onPlay) {
+                    Image(playIconName)
+                        .resizable()
+                        .frame(width: 44, height: 44)
+                        .clipShape(Circle())
+                        .background(
+                            Circle().fill(Color.white)
+                                .shadow(color: .black.opacity(0.3), radius: 6, y: 2)
+                        )
+                        .overlay(
+                            Circle().stroke(Color.white.opacity(0.15), lineWidth: 0)
+                        )
+                }
             }
-            .buttonStyle(.plain)
-            
-            Button(action: onPlay) {
-                Image(playIconName)
-                    .resizable()
-                    .frame(width: 44, height: 44)
-                    .clipShape(Circle())
-                    .background(
-                        Circle().fill(Color.white)
-                            .shadow(color: .black.opacity(0.3), radius: 6, y: 2)
-                    )
-                    .overlay(
-                        Circle().stroke(Color.white.opacity(0.15), lineWidth: 0) // para mantener misma API visual
-                    )
-            }
+            .layoutPriority(1) // Asegura que este bloque no se colapse
         }
     }
 }
