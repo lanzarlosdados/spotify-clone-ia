@@ -16,7 +16,7 @@ struct SplashScreenView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color(.background)
+                Color(.backgroundApp)
                     .ignoresSafeArea()
                 
                 VStack(spacing: 0) {

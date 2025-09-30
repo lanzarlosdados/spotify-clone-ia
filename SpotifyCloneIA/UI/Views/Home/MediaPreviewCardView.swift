@@ -194,7 +194,9 @@ struct MediaPreviewCardView: View {
                     HStack(spacing: 8) {
                         Image(previewIconName)
                             .resizable()
+                            .renderingMode(.template)
                             .frame(width: 18, height: 18)
+                            .foregroundColor(.white)
                         Text(previewButtonTitle)
                             .font(.custom("CircularStd-Bold", size: 14))
                             .lineLimit(1)
