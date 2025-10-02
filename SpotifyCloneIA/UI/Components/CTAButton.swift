@@ -190,5 +190,5 @@ struct AppleIcon: View {
         }
     }
     .padding(32)
-    .background(Color.background)
+    .background(Color.backgroundApp)
 }

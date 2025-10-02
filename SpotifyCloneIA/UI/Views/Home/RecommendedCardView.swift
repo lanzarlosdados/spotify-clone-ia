@@ -45,7 +45,9 @@ struct RecommendedCardView: View {
                     HStack {
                         Image("plus_circle")
                             .resizable()
+                            .renderingMode(.template)
                             .frame(width: 24, height: 24)
+                            .foregroundColor(Color.iconPrimary)
                             .clipShape(Circle())
                         Spacer()
                         

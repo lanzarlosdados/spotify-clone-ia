@@ -19,7 +19,6 @@ struct HomeView: View {
                 JumpBackInSectionView()
                 RecommendedForTodaySectionView()
 
-                // Nueva vista agregada por encima de TrendingAlbumsForYouSectionView
                 MediaPreviewCardView(
                     previewButtonTitle: "Preview episode",
                     kind: .episode

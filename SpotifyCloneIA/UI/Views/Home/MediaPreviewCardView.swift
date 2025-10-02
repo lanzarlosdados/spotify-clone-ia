@@ -122,13 +122,13 @@ struct MediaPreviewCardView: View {
             VStack(alignment: .leading, spacing: headerSpacing) {
                 Text(title)
                     .font(.custom("CircularStd-Bold", size: 22))
-                    .foregroundColor(.textPrimary)
+                    .foregroundColor(.white)
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Text(subtitle)
                     .font(.custom("CircularStd-Book", size: 13))
-                    .foregroundColor(.textSecondary)
+                    .foregroundColor(.white)
                     .lineLimit(1)
                     .truncationMode(.tail)
             }
@@ -168,7 +168,7 @@ struct MediaPreviewCardView: View {
             HStack(spacing: 8) {
                 Text(dateText)
                     .font(.custom("CircularStd-Bold", size: 12))
-                    .foregroundColor(.textPrimary)
+                    .foregroundColor(.white)
                 
                 Image(bulletIconName)
                     .resizable()
@@ -177,30 +177,31 @@ struct MediaPreviewCardView: View {
                 
                 Text(durationText)
                     .font(.custom("CircularStd-Bold", size: 12))
-                    .foregroundColor(.textPrimary)
+                    .foregroundColor(.white)
             }
             
             // Descripción
             Text(descriptionText)
                 .font(.custom("CircularStd-Book", size: 12))
-                .foregroundColor(.textSecondary)
+                .foregroundColor(.white)
                 .lineLimit(3)
                 .fixedSize(horizontal: false, vertical: true)
             
             // Acciones
             HStack(spacing: 12) {
-                // Preview (flexible)
                 Button(action: onPreview) {
                     HStack(spacing: 8) {
                         Image(previewIconName)
                             .resizable()
+                            .renderingMode(.template)
                             .frame(width: 18, height: 18)
+                            .foregroundColor(.white)
                         Text(previewButtonTitle)
                             .font(.custom("CircularStd-Bold", size: 14))
                             .lineLimit(1)
                             .minimumScaleFactor(0.9)
                     }
-                    .foregroundColor(.textPrimary)
+                    .foregroundColor(.white)
                     .padding(.horizontal, 14)
                     .frame(height: buttonsHeight)
                     .background(
@@ -244,19 +245,7 @@ struct MediaPreviewCardView: View {
 
 #Preview {
     ZStack {
-        Color.black.ignoresSafeArea()
         VStack(spacing: 24) {
-            MediaPreviewCardView(
-                previewButtonTitle: "Preview episode",
-                kind: .episode
-            )
-            MediaPreviewCardView(
-                title: "Live at the Royal Albert Hall",
-                subtitle: "Video • Arctic Monkeys",
-                previewButtonTitle: "Preview video",
-                artworkName: "solved-murders-podcast",
-                kind: .video
-            )
             MediaPreviewCardView(
                 title: "Blur (Special Edition)",
                 subtitle: "Album • 32 songs, 2 hr 3 min",
@@ -270,5 +259,5 @@ struct MediaPreviewCardView: View {
         }
         .padding()
     }
-    .preferredColorScheme(.dark)
+    .preferredColorScheme(.light)
 }

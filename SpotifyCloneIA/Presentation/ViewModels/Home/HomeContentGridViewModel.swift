@@ -24,7 +24,7 @@ final class HomeContentGridViewModel {
         // Sample data based on the Figma design.
         // Updated to use mock assets: card-slim-1 ... card-slim-6
         cardViewModels = [
-            CardSlimViewModel(imageName: "card-slim-1", title: "OK Computer", showNotification: true),
+            CardSlimViewModel(imageName: "card-slim-7", title: "OK Computer", showNotification: true),
             CardSlimViewModel(imageName: "card-slim-2", title: "Blur: the best of", showNotification: false),
             CardSlimViewModel(imageName: "card-slim-3", title: "Govinda", showNotification: false),
             CardSlimViewModel(imageName: "card-slim-4", title: "Playlist Viper", showNotification: false),

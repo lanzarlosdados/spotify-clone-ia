@@ -35,12 +35,12 @@ struct TabBarControllerView: View {
             }
             .tag(TabBarViewModel.TabItem.library)
         }
-        .tint(.white)
+        .tint(Color.textPrimary)
     }
 }
 
 // MARK: - Preview
 #Preview {
     TabBarControllerView(tabBarViewModel: TabBarViewModel())
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(.light)
 }

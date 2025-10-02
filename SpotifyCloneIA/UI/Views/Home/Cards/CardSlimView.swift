@@ -27,7 +27,8 @@ struct CardSlimView: View {
         }
         .frame(height: cardHeight)
         .background(Color.surfaceSecondary)
-        .cornerRadius(cornerRadius)
+        // Importante: recorta el contenido al mismo radio
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
     }
     
     // MARK: - Card Image
@@ -46,7 +47,7 @@ struct CardSlimView: View {
         HStack(spacing: 8) {
             Text(viewModel.title)
                 .font(.system(size: 11, weight: .bold))
-                .foregroundColor(.white)
+                .foregroundColor(.textPrimary)
             
             if viewModel.showNotification {
                 Circle()

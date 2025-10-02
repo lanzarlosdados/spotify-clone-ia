@@ -22,6 +22,5 @@ struct HomeContentGridView: View {
 // MARK: - Preview
 #Preview {
     HomeContentGridView()
-        .background(Color.black)
-        .preferredColorScheme(.dark)
+        .background(Color.backgroundApp)
 }

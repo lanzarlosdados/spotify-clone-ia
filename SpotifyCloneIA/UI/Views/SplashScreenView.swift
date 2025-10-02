@@ -16,7 +16,7 @@ struct SplashScreenView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color(.background)
+                Color(.backgroundApp)
                     .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
@@ -33,7 +33,6 @@ struct SplashScreenView: View {
                 }
             }
         }
-        .preferredColorScheme(.dark)
         .onAppear {
             withAnimation(.easeOut(duration: 1.0)) {
                 logoScale = 1.0
@@ -74,4 +73,5 @@ struct SpotifyLogoView: View {
 // MARK: - Preview
 #Preview {
     SplashScreenView()
+        .preferredColorScheme(.dark) // Preview-only to test Dark Mode
 }
