@@ -62,8 +62,7 @@ struct LoginView: View {
     
     private var payoffText: some View {
         Text("Millions of songs.\nFree on Spotify.")
-            .font(.custom("Circular Std", size: 30))
-            .fontWeight(.bold)
+            .font(FontsManager.circular(.bold, size: 30))
             .foregroundColor(.textPrimary)
             .multilineTextAlignment(.center)
             .lineSpacing(6)
@@ -119,7 +118,7 @@ struct LoginView: View {
     // MARK: - UI Components
     private func errorMessageView(_ message: String) -> some View {
         Text(message)
-            .font(.custom("Circular Std", size: 14))
+            .font(FontsManager.circular(.book, size: 14))
             .foregroundColor(.red)
             .multilineTextAlignment(.center)
             .padding(.horizontal, buttonsHorizontalPadding)
@@ -137,7 +136,7 @@ struct LoginView: View {
                     .scaleEffect(1.2)
                 
                 Text("Loading...")
-                    .font(.custom("Circular Std", size: 16))
+                    .font(FontsManager.circular(.book, size: 16))
                     .foregroundColor(.white)
             }
             .padding(24)
