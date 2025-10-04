@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CircularStd-MediumItalic.otf</string>
+		<string>CircularStd-Medium.otf</string>
+		<string>CircularStd-Light.otf</string>
+		<string>CircularStd-Light Italic.otf</string>
+		<string>CircularStd-BlackItalic.otf</string>
+		<string>CircularStd-Bold.otf</string>
+		<string>CircularStd-BoldItalic.otf</string>
+		<string>CircularStd-Book.otf</string>
+	</array>
+</dict>
 </plist>
