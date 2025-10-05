@@ -40,6 +40,8 @@
 		06A3D5022E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIATests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Features/Library/Presentation/Views/LibraryView.swift,
+				Features/Search/Presentation/Views/SearchView.swift,
 				"fonts/CircularStd-Black.otf",
 				"fonts/CircularStd-BlackItalic.otf",
 				"fonts/CircularStd-Bold.otf",
@@ -50,14 +52,14 @@
 				"fonts/CircularStd-Light.otf",
 				"fonts/CircularStd-Medium.otf",
 				"fonts/CircularStd-MediumItalic.otf",
-				UI/Views/Library/LibraryView.swift,
-				UI/Views/Search/SearchView.swift,
 			);
 			target = 06C924262E647CBC00BD8D1F /* SpotifyCloneIATests */;
 		};
 		06A3D5032E80BD6700EB42C1 /* Exceptions for "SpotifyCloneIA" folder in "SpotifyCloneIAUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Features/Library/Presentation/Views/LibraryView.swift,
+				Features/Search/Presentation/Views/SearchView.swift,
 				"fonts/CircularStd-Black.otf",
 				"fonts/CircularStd-BlackItalic.otf",
 				"fonts/CircularStd-Bold.otf",
@@ -68,8 +70,6 @@
 				"fonts/CircularStd-Light.otf",
 				"fonts/CircularStd-Medium.otf",
 				"fonts/CircularStd-MediumItalic.otf",
-				UI/Views/Library/LibraryView.swift,
-				UI/Views/Search/SearchView.swift,
 			);
 			target = 06C924302E647CBC00BD8D1F /* SpotifyCloneIAUITests */;
 		};

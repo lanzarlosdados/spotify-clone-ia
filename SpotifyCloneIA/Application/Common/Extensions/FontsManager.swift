@@ -91,39 +91,3 @@ enum FontAliases {
         }
     }
 }
-
-// MARK: - Debug helpers
-#if DEBUG
-enum FontsDebug {
-    /// Llama a esta función una vez (por ejemplo, en el onAppear de SplashScreenView)
-    /// para validar que todas las variantes declaradas están disponibles.
-    static func validateCircularStdAvailability(logPrefix: String = "🅵🅾🅽🆃") {
-        let available = availablePostScriptNames()
-        
-        for style in CircularStd.allCases {
-            let name = style.postScriptName
-            if available.contains(name) {
-                print("\(logPrefix) OK: \(name) disponible")
-            } else {
-                print("\(logPrefix) WARNING: \(name) NO encontrado. Verifica UIAppFonts en Info.plist y que el archivo esté en el target.")
-            }
-        }
-        
-        // Comprobación adicional: alias heredados
-        if let mapped = FontAliases.replacement(for: FontAliases.legacyCircularStdDisplay) {
-            if available.contains(mapped) {
-                print("\(logPrefix) Alias '\(FontAliases.legacyCircularStdDisplay)' -> '\(mapped)' OK")
-            } else {
-                print("\(logPrefix) Alias '\(FontAliases.legacyCircularStdDisplay)' -> '\(mapped)' NO encontrado")
-            }
-        }
-    }
-    
-    private static func availablePostScriptNames() -> Set<String> {
-        guard let cfArray = CTFontManagerCopyAvailablePostScriptNames() else { return [] }
-        let array = cfArray as [AnyObject]
-        let names = array.compactMap { $0 as? String }
-        return Set(names)
-    }
-}
-#endif
