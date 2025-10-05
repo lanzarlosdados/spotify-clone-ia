@@ -9,6 +9,19 @@ struct TabBarControllerView: View {
     // MARK: - Properties
     @Bindable var tabBarViewModel: TabBarViewModel
     
+    // Mantener una única instancia del ViewModel de búsqueda usando la factory
+    private let searchViewModel: SearchViewModel
+    
+    // MARK: - Init
+    init(tabBarViewModel: TabBarViewModel) {
+        self.tabBarViewModel = tabBarViewModel
+        
+        // Crear SearchViewModel usando la factory (Composition Root pattern)
+        // Debug log for easier debugging.
+        print("🎬 TabBarControllerView: Initializing with SearchFactory...")
+        self.searchViewModel = SearchFactory.shared.makeSearchViewModel()
+    }
+    
     var body: some View {
         TabView(selection: $tabBarViewModel.selectedTab) {
             HomeView()
@@ -19,7 +32,7 @@ struct TabBarControllerView: View {
             }
             .tag(TabBarViewModel.TabItem.home)
             
-            SearchView()
+            SearchView(viewModel: searchViewModel)
             .tabItem {
                 TabBarItem(
                     tab: .search
