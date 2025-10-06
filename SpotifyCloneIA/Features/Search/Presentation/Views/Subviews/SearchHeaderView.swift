@@ -19,20 +19,20 @@ struct SearchHeaderView: View {
             // Search icon
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.black)
-                .font(.system(size: 20))
+                .font(.circular(.book, size: 20))
             
             // Search text field con placeholder personalizado en negro
             ZStack(alignment: .leading) {
                 if searchQuery.isEmpty {
                     Text("What do you want to listen to?")
                         .foregroundColor(.black)
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.circular(.medium, size: 16))
                         .allowsHitTesting(false)
                 }
                 
                 TextField("", text: $searchQuery)
                     .foregroundColor(.black) // color del texto ingresado
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.circular(.medium, size: 16))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .submitLabel(.search)
@@ -65,7 +65,7 @@ struct SearchHeaderView: View {
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.gray)
-                        .font(.system(size: 18))
+                        .font(.circular(.book, size: 18))
                 }
             }
         }

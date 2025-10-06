@@ -19,7 +19,7 @@ struct CategoryCardView: View {
             // Category title
             VStack {
                 Text(category.title)
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.circular(.medium, size: 15))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(12)

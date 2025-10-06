@@ -83,7 +83,7 @@ struct SearchView: View {
                     .padding(.top, 40)
             } else if viewModel.searchResults.isEmpty {
                 Text("No results found")
-                    .font(.system(size: 16))
+                    .font(.circular(.book, size: 16))
                     .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 40)
@@ -104,7 +104,7 @@ struct SearchView: View {
             if !viewModel.genres.isEmpty {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Explore your musical type")
-                        .font(.system(size: 22, weight: .bold))
+                        .font(.circular(.bold, size: 22))
                         .foregroundColor(Color.textPrimary)
                         .padding(.horizontal, 16)
                     
@@ -124,7 +124,7 @@ struct SearchView: View {
             if !viewModel.categories.isEmpty {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Browse all")
-                        .font(.system(size: 22, weight: .bold))
+                        .font(.circular(.bold, size: 22))
                         .foregroundColor(Color.textPrimary)
                         .padding(.horizontal, 16)
                     
@@ -154,7 +154,7 @@ struct SearchView: View {
             // Error message
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
-                    .font(.system(size: 14))
+                    .font(.circular(.book, size: 14))
                     .foregroundColor(.red)
                     .padding(.horizontal, 16)
             }

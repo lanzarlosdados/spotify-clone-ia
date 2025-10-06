@@ -28,7 +28,7 @@ struct GenreCardView: View {
             
             // Hashtag text
             Text(genre.hashtag)
-                .font(.system(size: 16, weight: .bold))
+                .font(.circular(.bold, size: 16))
                 .foregroundColor(.white)
                 .padding(12)
         }

@@ -20,19 +20,19 @@ struct SearchResultRowView: View {
                 .overlay(
                     Image(systemName: iconForType(result.type))
                         .foregroundColor(.white.opacity(0.5))
-                        .font(.system(size: 20))
+                        .font(.circular(.book, size: 20))
                 )
             
             // Result info
             VStack(alignment: .leading, spacing: 4) {
                 Text(result.title)
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.circular(.medium, size: 16))
                     .foregroundColor(.white)
                     .lineLimit(1)
                 
                 if let subtitle = result.subtitle {
                     Text(subtitle)
-                        .font(.system(size: 14))
+                        .font(.circular(.book, size: 14))
                         .foregroundColor(.gray)
                         .lineLimit(1)
                 }
