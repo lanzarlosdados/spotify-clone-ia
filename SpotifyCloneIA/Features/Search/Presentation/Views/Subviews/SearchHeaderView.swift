@@ -18,32 +18,42 @@ struct SearchHeaderView: View {
         HStack(spacing: 12) {
             // Search icon
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.gray)
+                .foregroundColor(.black)
                 .font(.system(size: 20))
             
-            // Search text field
-            TextField("What do you want to listen to?", text: $searchQuery)
-                .foregroundColor(.white)
-                .font(.system(size: 16, weight: .medium))
-                .autocorrectionDisabled()
-                .textInputAutocapitalization(.never)
-                .submitLabel(.search)
-                .onSubmit {
-                    // Immediate search on submit
-                    onSearch()
+            // Search text field con placeholder personalizado en negro
+            ZStack(alignment: .leading) {
+                if searchQuery.isEmpty {
+                    Text("What do you want to listen to?")
+                        .foregroundColor(.black)
+                        .font(.system(size: 16, weight: .medium))
+                        .allowsHitTesting(false)
                 }
-                .onChange(of: searchQuery) { _, _ in
-                    // Debounce search to avoid main-thread pressure while typing
-                    searchDebounceTask?.cancel()
-                    searchDebounceTask = Task {
-                        // Sleep off the main actor
-                        try? await Task.sleep(nanoseconds: 350_000_000) // 350ms
-                        // If not cancelled, trigger search
-                        if !Task.isCancelled {
-                            onSearch()
+                
+                TextField("", text: $searchQuery)
+                    .foregroundColor(.black) // color del texto ingresado
+                    .font(.system(size: 16, weight: .medium))
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .submitLabel(.search)
+                    .onSubmit {
+                        // Immediate search on submit
+                        onSearch()
+                    }
+                    .onChange(of: searchQuery) { _, _ in
+                        // Debounce search to avoid main-thread pressure while typing
+                        searchDebounceTask?.cancel()
+                        searchDebounceTask = Task {
+                            // Sleep off the main actor
+                            try? await Task.sleep(nanoseconds: 350_000_000) // 350ms
+                            // If not cancelled, trigger search
+                            if !Task.isCancelled {
+                                onSearch()
+                            }
                         }
                     }
-                }
+                    .accessibilityLabel("Search")
+            }
             
             // Clear button
             if !searchQuery.isEmpty {
@@ -61,7 +71,7 @@ struct SearchHeaderView: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
-        .background(Color.white.opacity(0.1))
+        .background(Color.surfaceField)
         .cornerRadius(8)
     }
 }

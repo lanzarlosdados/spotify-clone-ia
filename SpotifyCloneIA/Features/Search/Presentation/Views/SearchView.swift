@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 // MARK: - SearchView
 /// Main search screen view following Clean Architecture and MVVM.
@@ -19,7 +20,7 @@ struct SearchView: View {
         NavigationStack {
             ZStack {
                 // Background color
-                Color.black.ignoresSafeArea()
+                Color.backgroundApp.ignoresSafeArea()
                 
                 ScrollView {
                     VStack(spacing: 16) {
@@ -47,6 +48,22 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
             .navigationBarTitleDisplayMode(.large)
+            .tint(Color.textPrimary) // Color para botones/elementos de la barra
+            .onAppear {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithTransparentBackground()
+                // Colores de título (normal y grande)
+                appearance.titleTextAttributes = [
+                    .foregroundColor: UIColor(Color.textPrimary)
+                ]
+                appearance.largeTitleTextAttributes = [
+                    .foregroundColor: UIColor(Color.textPrimary)
+                ]
+                
+                UINavigationBar.appearance().standardAppearance = appearance
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                UINavigationBar.appearance().compactAppearance = appearance
+            }
             .task {
                 // Load initial data when view appears
                 await viewModel.loadInitialData()
@@ -88,7 +105,7 @@ struct SearchView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Explore your musical type")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.textPrimary)
                         .padding(.horizontal, 16)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -108,7 +125,7 @@ struct SearchView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Browse all")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.textPrimary)
                         .padding(.horizontal, 16)
                     
                     LazyVGrid(
