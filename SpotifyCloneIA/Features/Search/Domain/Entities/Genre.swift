@@ -11,7 +11,6 @@ struct Genre: Identifiable, Equatable {
     let name: String
     let hashtag: String
     let imageURL: String?
-    let backgroundColor: String
     
     // MARK: - Initialization
     
@@ -19,13 +18,11 @@ struct Genre: Identifiable, Equatable {
         id: String,
         name: String,
         hashtag: String,
-        imageURL: String? = nil,
-        backgroundColor: String
+        imageURL: String? = nil
     ) {
         self.id = id
         self.name = name
         self.hashtag = hashtag
         self.imageURL = imageURL
-        self.backgroundColor = backgroundColor
     }
 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 // MARK: - GenreCardView
-/// Card view displaying a musical genre with hashtag.
+/// Card view displaying a musical genre with hashtag and image.
 /// Used in the "Explore your musical type" section.
 struct GenreCardView: View {
     
@@ -13,14 +13,36 @@ struct GenreCardView: View {
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            // Background color
-            Color(hex: genre.backgroundColor)
+            // Image layer (network or local placeholder)
+            if let imageURL = genre.imageURL, !imageURL.isEmpty {
+                // Network image with AsyncImage
+                AsyncImage(url: URL(string: imageURL)) { phase in
+                    switch phase {
+                    case .empty:
+                        // Loading placeholder
+                        placeholderImageView
+                    case .success(let image):
+                        // Successfully loaded image
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    case .failure:
+                        // Failed to load, show placeholder
+                        placeholderImageView
+                    @unknown default:
+                        placeholderImageView
+                    }
+                }
+            } else {
+                // No URL, use local placeholder
+                placeholderImageView
+            }
             
-            // Gradient overlay
+            // Gradient overlay for better text readability
             LinearGradient(
                 colors: [
                     Color.black.opacity(0.1),
-                    Color.black.opacity(0.6)
+                    Color.black.opacity(0.7)
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -34,6 +56,27 @@ struct GenreCardView: View {
         }
         .frame(height: 191)
         .cornerRadius(8)
+        .clipped()
+    }
+    
+    // MARK: - Helper Views
+    
+    /// Placeholder image view using local assets
+    private var placeholderImageView: some View {
+        Image(randomPlaceholderImage())
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+    }
+    
+    // MARK: - Helper Methods
+    
+    /// Returns a random placeholder image name based on genre id
+    /// Images are sourced from SearchViewModel.genrePlaceholderImages
+    private func randomPlaceholderImage() -> String {
+        // Use genre id hash to consistently pick the same image for the same genre
+        let hash = abs(genre.id.hashValue)
+        let index = hash % SearchViewModel.genrePlaceholderImages.count
+        return SearchViewModel.genrePlaceholderImages[index]
     }
 }
 
@@ -74,11 +117,11 @@ extension Color {
             from: Genre(
                 id: "1",
                 name: "Permanent Wave",
-                hashtag: "#permanent wave",
-                backgroundColor: "#8D67AB"
+                hashtag: "#permanent wave"
             )
         )
     )
-    .frame(width: 180, height: 120)
+    .frame(width: 180, height: 191)
     .padding()
+    .background(Color.black)
 }

@@ -58,19 +58,19 @@ final class SearchRepository: SearchRepositoryProtocol {
                 id: "1",
                 name: "Permanent Wave",
                 hashtag: "#permanent wave",
-                backgroundColor: "#8D67AB"
+                imageURL: "thumb-verticale"
             ),
             Genre(
                 id: "2",
                 name: "Madchester",
                 hashtag: "#madchester",
-                backgroundColor: "#E8115B"
+                imageURL: "thumb-verticale-1"
             ),
             Genre(
                 id: "3",
                 name: "Dance Rock",
                 hashtag: "#dance rock",
-                backgroundColor: "#1E3264"
+                imageURL: "thumb-verticale-2"
             )
         ]
         

@@ -7,6 +7,15 @@ import Foundation
 @Observable
 final class SearchViewModel {
     
+    // MARK: - Static Properties
+    
+    /// Placeholder images for genre cards when imageURL is not available.
+    static let genrePlaceholderImages = [
+        "thumb-verticale",
+        "thumb-verticale-1",
+        "thumb-verticale-2"
+    ]
+    
     // MARK: - Properties
     
     /// Search query text entered by the user.

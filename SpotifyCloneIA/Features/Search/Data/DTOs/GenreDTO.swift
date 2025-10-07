@@ -11,7 +11,6 @@ struct GenreDTO: Codable {
     let name: String
     let hashtag: String
     let imageURL: String?
-    let backgroundColor: String
     
     // MARK: - CodingKeys
     
@@ -20,7 +19,6 @@ struct GenreDTO: Codable {
         case name
         case hashtag
         case imageURL = "image_url"
-        case backgroundColor = "background_color"
     }
     
     // MARK: - Mapping
@@ -32,8 +30,7 @@ struct GenreDTO: Codable {
             id: id,
             name: name,
             hashtag: hashtag,
-            imageURL: imageURL,
-            backgroundColor: backgroundColor
+            imageURL: imageURL
         )
     }
 }

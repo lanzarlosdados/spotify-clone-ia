@@ -11,7 +11,6 @@ struct GenreModel: Identifiable, Equatable {
     let name: String
     let hashtag: String
     let imageURL: String?
-    let backgroundColor: String
     
     // MARK: - Initialization
     
@@ -20,6 +19,5 @@ struct GenreModel: Identifiable, Equatable {
         self.name = entity.name
         self.hashtag = entity.hashtag
         self.imageURL = entity.imageURL
-        self.backgroundColor = entity.backgroundColor
     }
 }
