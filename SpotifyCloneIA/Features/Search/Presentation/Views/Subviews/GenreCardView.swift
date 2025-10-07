@@ -32,7 +32,7 @@ struct GenreCardView: View {
                 .foregroundColor(.white)
                 .padding(12)
         }
-        .frame(height: 120)
+        .frame(height: 191)
         .cornerRadius(8)
     }
 }

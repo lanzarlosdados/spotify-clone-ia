@@ -112,7 +112,7 @@ struct SearchView: View {
                         HStack(spacing: 12) {
                             ForEach(viewModel.genres) { genre in
                                 GenreCardView(genre: genre)
-                                    .frame(width: 180)
+                                    .frame(width: 108)
                             }
                         }
                         .padding(.horizontal, 16)
