@@ -24,7 +24,10 @@ struct TabBarControllerView: View {
     
     var body: some View {
         TabView(selection: $tabBarViewModel.selectedTab) {
-            HomeView()
+            // Home Tab - NavigationStack for future detail navigation
+            NavigationStack {
+                HomeView()
+            }
             .tabItem {
                 TabBarItem(
                     tab: .home
@@ -32,6 +35,7 @@ struct TabBarControllerView: View {
             }
             .tag(TabBarViewModel.TabItem.home)
             
+            // Search Tab - Already has its own NavigationStack
             SearchView(viewModel: searchViewModel)
             .tabItem {
                 TabBarItem(
@@ -40,7 +44,10 @@ struct TabBarControllerView: View {
             }
             .tag(TabBarViewModel.TabItem.search)
             
-            LibraryView()
+            // Library Tab - NavigationStack for detail navigation
+            NavigationStack {
+                LibraryView()
+            }
             .tabItem {
                 TabBarItem(
                     tab: .library

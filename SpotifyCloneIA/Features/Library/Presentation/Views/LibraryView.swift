@@ -57,14 +57,11 @@ struct LibraryView: View {
             Color.primaryBackground.ignoresSafeArea()
             
             VStack(spacing: 0) {
-                // Header with title and actions
-                headerView
-                
                 // Filters row (altura fija para evitar reflow)
                 filtersView
                     .frame(height: filtersBarHeight)
                     .padding(.horizontal, headerPadding)
-                    .padding(.top, 16)
+                    .padding(.top, 8)
                 
                 // Content + overlays con animación
                 ZStack {
@@ -90,62 +87,51 @@ struct LibraryView: View {
                 }
             }
         }
+        .navigationTitle("Your Library")
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                // Avatar (placeholder for now)
+                Circle()
+                    .fill(Color.spotifyGreen)
+                    .frame(width: 32, height: 32)
+                    .overlay(
+                        Text("F")
+                            .font(.custom("CircularStd-Bold", size: 16))
+                            .foregroundColor(.black)
+                    )
+            }
+            
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                HStack(spacing: 8) {
+                    // Search button
+                    Button(action: {
+                        // TODO: Navigate to search
+                        print("🔍 Search tapped")
+                    }) {
+                        Image("ico-32-search")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(Color.textPrimary)
+                    }
+                    
+                    // Add button
+                    Button(action: {
+                        // TODO: Show add menu
+                        print("➕ Add tapped")
+                    }) {
+                        Image("ico-32-plus")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(Color.textPrimary)
+                    }
+                }
+            }
+        }
         .task {
             // Load data when view appears (using .task for async support)
             await viewModel.loadLibraryItems()
         }
-    }
-    
-    // MARK: - Header View
-    
-    /// Header with avatar, title, and action buttons.
-    private var headerView: some View {
-        HStack {
-            // Avatar (placeholder for now)
-            Circle()
-                .fill(Color.spotifyGreen)
-                .frame(width: 32, height: 32)
-                .overlay(
-                    Text("F")
-                        .font(.custom("CircularStd-Bold", size: 16))
-                        .foregroundColor(.black)
-                )
-            
-            // Title
-            Text("Your Library")
-                .font(.custom("CircularStd-Bold", size: 22))
-                .foregroundColor(Color.textPrimary)
-            
-            Spacer()
-            
-            // Search button
-            Button(action: {
-                // TODO: Navigate to search
-                print("🔍 Search tapped")
-            }) {
-                Image("ico-32-search")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(Color.textPrimary)
-                    .frame(width: 44, height: 44) // área táctil consistente
-                    .contentShape(Rectangle())
-            }
-            
-            // Add button
-            Button(action: {
-                // TODO: Show add menu
-                print("➕ Add tapped")
-            }) {
-                Image("ico-32-plus")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(Color.textPrimary)
-                    .frame(width: 44, height: 44) // área táctil consistente
-                    .contentShape(Rectangle())
-            }
-        }
-        .padding(.horizontal, headerPadding)
-        .padding(.top, 8)
     }
     
     // MARK: - Filters View
