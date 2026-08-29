@@ -186,3 +186,10 @@ divergían del patrón y había colores/fuentes/assets fuera del asset catalog �
 - `App/UserMenu/` es una pantalla con ViewModel pero sin capa Domain/Data (es un overlay puro).
 - El asset `darkText` colisiona con el símbolo `UIColor.darkText` (warning del compilador) — renombrar si molesta.
 - No hay tests reales todavía (solo las plantillas).
+- **Bug preexistente** en `LibraryViewModel.applyFiltersAndSort()`: reconstruye
+  `LibraryItem` sin `dateAdded`, así que el orden "Recents" nunca ordena de verdad
+  (muestra los items en orden ~arbitrario). No se tocó en el refactor para no
+  cambiar comportamiento; para arreglarlo hay que llevar `dateAdded` hasta
+  `LibraryItemModel`.
+- Los `#Preview` de las section views de Home usan `.previewLayout` (warning:
+  ignorado dentro de `#Preview`) — preexistente.
