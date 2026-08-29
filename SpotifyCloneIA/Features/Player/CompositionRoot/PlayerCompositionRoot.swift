@@ -1,13 +1,42 @@
 import Foundation
-import SwiftUI
 
+// MARK: - PlayerCompositionRoot
+/// Composition Root for the Player feature.
+/// Creates and wires all dependencies following the Dependency Injection pattern.
 final class PlayerCompositionRoot {
-    @MainActor
-    static func createPlayerView() -> some View {
-        let dataSource = MockPlayerDataSource()
-        let repository = DefaultPlayerRepository(dataSource: dataSource)
+
+    // MARK: - Singleton
+
+    static let shared = PlayerCompositionRoot()
+
+    private init() {
+        // Debug log for easier debugging.
+        print("🏗️ PlayerCompositionRoot: Initialized.")
+    }
+
+    // MARK: - Factory Methods
+
+    /// Creates a PlayerViewModel with all dependencies injected.
+    func makePlayerViewModel() -> PlayerViewModel {
+        let repository = makeRepository()
         let useCase = GetCurrentlyPlayingTrackUseCase(playerRepository: repository)
-        let viewModel = PlayerViewModel(getCurrentlyPlayingTrackUseCase: useCase)
-        return PlayerView(viewModel: viewModel)
+        return PlayerViewModel(getCurrentlyPlayingTrackUseCase: useCase)
+    }
+
+    /// Creates the repository implementation.
+    /// Currently returns a mock-backed repository for development.
+    /// TODO: Replace with a real API repository when the backend is ready.
+    private func makeRepository() -> PlayerRepositoryProtocol {
+        DefaultPlayerRepository(dataSource: MockPlayerDataSource())
+    }
+}
+
+// MARK: - Convenience Extension
+
+extension PlayerCompositionRoot {
+
+    /// Creates a fully configured PlayerView.
+    func makePlayerView() -> PlayerView {
+        PlayerView(viewModel: makePlayerViewModel())
     }
 }

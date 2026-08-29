@@ -7,13 +7,8 @@ final class DefaultPlayerRepository: PlayerRepositoryProtocol {
         self.dataSource = dataSource
     }
 
-    func getCurrentlyPlayingTrack() async -> Result<Track, Error> {
-        let result = await dataSource.getCurrentlyPlayingTrack()
-        switch result {
-        case .success(let trackDTO):
-            return .success(trackDTO.toDomain())
-        case .failure(let error):
-            return .failure(error)
-        }
+    func getCurrentlyPlayingTrack() async throws -> Track {
+        let dto = try await dataSource.getCurrentlyPlayingTrack()
+        return dto.toDomain()
     }
 }

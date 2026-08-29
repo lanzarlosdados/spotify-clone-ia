@@ -7,7 +7,7 @@ final class GetCurrentlyPlayingTrackUseCase {
         self.playerRepository = playerRepository
     }
 
-    func execute() async -> Result<Track, Error> {
-        return await playerRepository.getCurrentlyPlayingTrack()
+    func execute() async throws -> Track {
+        try await playerRepository.getCurrentlyPlayingTrack()
     }
 }

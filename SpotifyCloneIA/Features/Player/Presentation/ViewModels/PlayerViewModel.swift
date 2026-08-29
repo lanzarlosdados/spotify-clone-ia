@@ -1,31 +1,59 @@
 import Foundation
-import SwiftUI
 
-@MainActor
-final class PlayerViewModel: ObservableObject {
-    @Published var track: Track?
-    @Published var isLoading = false
-    @Published var errorMessage: String?
+// MARK: - PlayerViewModel
+/// View model for the Player screen.
+/// Annotated with @Observable for reactive SwiftUI views.
+@Observable
+final class PlayerViewModel {
+
+    // MARK: - Properties
+
+    var track: Track?
+    var isLoading = false
+    var errorMessage: String?
+
+    // MARK: - Use Cases
 
     private let getCurrentlyPlayingTrackUseCase: GetCurrentlyPlayingTrackUseCase
 
+    // MARK: - Initialization
+
     init(getCurrentlyPlayingTrackUseCase: GetCurrentlyPlayingTrackUseCase) {
         self.getCurrentlyPlayingTrackUseCase = getCurrentlyPlayingTrackUseCase
+
+        // Debug log for easier debugging.
+        print("🎯 PlayerViewModel: Initialized.")
     }
 
-    func fetchTrack() {
-        isLoading = true
-        errorMessage = nil
+    // MARK: - Public Methods
 
-        Task {
-            let result = await getCurrentlyPlayingTrackUseCase.execute()
-            switch result {
-            case .success(let track):
+    /// Loads the currently playing track.
+    func load() async {
+        await MainActor.run {
+            isLoading = true
+            errorMessage = nil
+        }
+
+        // Debug log for easier debugging.
+        print("🔄 PlayerViewModel: Loading currently playing track...")
+
+        do {
+            let track = try await getCurrentlyPlayingTrackUseCase.execute()
+            await MainActor.run {
                 self.track = track
-            case .failure(let error):
-                self.errorMessage = error.localizedDescription
+                isLoading = false
             }
-            isLoading = false
+
+            // Debug log for easier debugging.
+            print("✅ PlayerViewModel: Loaded '\(track.title)'.")
+        } catch {
+            await MainActor.run {
+                errorMessage = error.localizedDescription
+                isLoading = false
+            }
+
+            // Debug log for easier debugging.
+            print("❌ PlayerViewModel: Error loading track - \(error.localizedDescription)")
         }
     }
 }

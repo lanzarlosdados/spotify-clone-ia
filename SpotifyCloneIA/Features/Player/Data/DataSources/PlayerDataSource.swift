@@ -1,21 +1,43 @@
 import Foundation
 
+// MARK: - PlayerDataSource
+
 protocol PlayerDataSource {
-    func getCurrentlyPlayingTrack() async -> Result<TrackDTO, Error>
+    func getCurrentlyPlayingTrack() async throws -> TrackDTO
 }
 
-class MockPlayerDataSource: PlayerDataSource {
-    func getCurrentlyPlayingTrack() async -> Result<TrackDTO, Error> {
+// MARK: - MockPlayerDataSource
+/// Loads the currently playing track from the bundled `MockTrack.json` fixture.
+/// TODO: replace with a real data source (HTTPClient) when the backend is ready.
+final class MockPlayerDataSource: PlayerDataSource {
+
+    enum MockError: LocalizedError {
+        case fixtureNotFound
+
+        var errorDescription: String? {
+            switch self {
+            case .fixtureNotFound: return "MockTrack.json not found."
+            }
+        }
+    }
+
+    func getCurrentlyPlayingTrack() async throws -> TrackDTO {
+        // Debug log for easier debugging.
+        print("🔄 MockPlayerDataSource: Loading MockTrack.json...")
+
+        // Simulate network delay for development.
+        try await Task.sleep(nanoseconds: 400_000_000) // 0.4s
+
         guard let url = Bundle.main.url(forResource: "MockTrack", withExtension: "json") else {
-            return .failure(NSError(domain: "MockPlayerDataSource", code: 404, userInfo: [NSLocalizedDescriptionKey: "MockTrack.json not found."]))
+            print("❌ MockPlayerDataSource: MockTrack.json not found.")
+            throw MockError.fixtureNotFound
         }
 
-        do {
-            let data = try Data(contentsOf: url)
-            let trackDTO = try JSONDecoder().decode(TrackDTO.self, from: data)
-            return .success(trackDTO)
-        } catch {
-            return .failure(error)
-        }
+        let data = try Data(contentsOf: url)
+        let dto = try JSONDecoder().decode(TrackDTO.self, from: data)
+
+        // Debug log for easier debugging.
+        print("✅ MockPlayerDataSource: Loaded track '\(dto.title)'.")
+        return dto
     }
 }

@@ -1,7 +1,13 @@
 import SwiftUI
 
 struct PlayerView: View {
-    @StateObject var viewModel: PlayerViewModel
+
+    // Using `let` for the @Observable view model as per state management rules.
+    let viewModel: PlayerViewModel
+
+    init(viewModel: PlayerViewModel? = nil) {
+        self.viewModel = viewModel ?? PlayerCompositionRoot.shared.makePlayerViewModel()
+    }
 
     var body: some View {
         ZStack {
@@ -68,8 +74,12 @@ struct PlayerView: View {
                     .foregroundColor(.red)
             }
         }
-        .onAppear {
-            viewModel.fetchTrack()
+        .task {
+            await viewModel.load()
         }
     }
+}
+
+#Preview {
+    PlayerView()
 }
