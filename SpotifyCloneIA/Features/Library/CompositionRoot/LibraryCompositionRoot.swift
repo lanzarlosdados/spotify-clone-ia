@@ -38,13 +38,11 @@ final class LibraryCompositionRoot {
     }
     
     /// Creates the repository implementation.
-    /// Currently returns MockLibraryRepository for development.
-    /// TODO: Replace with real API repository when backend is ready.
+    /// Currently returns a mock-backed repository for development.
+    /// TODO: Replace the data source with a real (HTTPClient) one when the backend is ready.
     /// - Returns: LibraryRepositoryProtocol implementation
     private func makeRepository() -> LibraryRepositoryProtocol {
-        // Return mock repository for now
-        // TODO: Add environment check to use real API in production
-        return MockLibraryRepository()
+        return DefaultLibraryRepository(dataSource: MockLibraryDataSource())
     }
 }
 

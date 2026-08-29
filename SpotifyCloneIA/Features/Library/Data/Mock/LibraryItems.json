@@ -1,0 +1,14 @@
+[
+  { "id": "1",  "title": "Liked Songs",           "description": "Playlist • 16 songs",        "image_url": "rock-mix",               "type": "Liked Songs", "is_pinned": true,  "date_added": "2026-08-15T12:00:00Z" },
+  { "id": "2",  "title": "Solved Murders",         "description": "Podcast • 24 episodes",      "image_url": "solved-murders-podcast", "type": "Podcast",     "is_pinned": true,  "date_added": "2026-08-17T12:00:00Z" },
+  { "id": "3",  "title": "Arctic Monkeys",         "description": "Artist",                     "image_url": "arctic-monkeys",         "type": "Artist",      "is_pinned": false, "date_added": "2026-08-10T12:00:00Z" },
+  { "id": "4",  "title": "Rock Mix",               "description": "Playlist • 42 songs",        "image_url": "rock-mix",               "type": "Playlist",    "is_pinned": false, "date_added": "2026-08-18T12:00:00Z" },
+  { "id": "5",  "title": "Blur Special Edition",   "description": "Album • Blur",               "image_url": "blur-special-edition",   "type": "Album",       "is_pinned": false, "date_added": "2026-08-13T12:00:00Z" },
+  { "id": "6",  "title": "Pop Mix",                "description": "Playlist • 28 songs",        "image_url": "pop-mix",                "type": "Playlist",    "is_pinned": false, "date_added": "2026-08-19T12:00:00Z" },
+  { "id": "7",  "title": "Daily Episodes",         "description": "Podcast • 8 new episodes",   "image_url": "episode-one",            "type": "Podcast",     "is_pinned": false, "date_added": "2026-08-05T12:00:00Z" },
+  { "id": "8",  "title": "Beastie Boys",           "description": "Artist",                     "image_url": "beastie-boys",           "type": "Artist",      "is_pinned": false, "date_added": "2026-07-31T12:00:00Z" },
+  { "id": "9",  "title": "Upbeat Mix",             "description": "Playlist • 55 songs",        "image_url": "upbeat-mix",             "type": "Playlist",    "is_pinned": false, "date_added": "2026-08-16T12:00:00Z" },
+  { "id": "10", "title": "The Cure",               "description": "Artist",                     "image_url": "the-cure",               "type": "Artist",      "is_pinned": false, "date_added": "2026-08-08T12:00:00Z" },
+  { "id": "11", "title": "Blur",                   "description": "Album • Blur",               "image_url": "blur",                   "type": "Album",       "is_pinned": false, "date_added": "2026-08-12T12:00:00Z" },
+  { "id": "12", "title": "Today's Hits",           "description": "Playlist • 62 songs",        "image_url": "today-one",              "type": "Playlist",    "is_pinned": false, "date_added": "2026-08-14T12:00:00Z" }
+]
