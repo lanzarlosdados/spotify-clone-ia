@@ -27,6 +27,9 @@ struct TabBarControllerView: View {
             // Home Tab - NavigationStack for future detail navigation
             NavigationStack {
                 HomeCompositionRoot.shared.makeHomeView()
+                    .navigationDestination(for: PlaylistRoute.self) { route in
+                        PlaylistCompositionRoot.shared.makePlaylistView(playlistID: route.id)
+                    }
             }
             .tabItem {
                 TabBarItem(
@@ -47,6 +50,9 @@ struct TabBarControllerView: View {
             // Library Tab - NavigationStack for detail navigation
             NavigationStack {
                 LibraryView()
+                    .navigationDestination(for: PlaylistRoute.self) { route in
+                        PlaylistCompositionRoot.shared.makePlaylistView(playlistID: route.id)
+                    }
             }
             .tabItem {
                 TabBarItem(

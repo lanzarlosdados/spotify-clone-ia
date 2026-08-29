@@ -12,7 +12,9 @@ description: >-
 # Estructura de SpotifyCloneIA
 
 App iOS nativa, **SwiftUI**, Swift 5.0, iOS 18.5, **sin Swift Package Manager ni
-dependencias externas**. Xcode usa `PBXFileSystemSynchronizedRootGroup`: el
+dependencias externas en el target de la app** (única excepción: `swift-snapshot-testing`
+vía SPM, ligado solo al target `SpotifyCloneIATests`, para snapshot testing de vistas).
+Xcode usa `PBXFileSystemSynchronizedRootGroup`: el
 filesystem es la fuente de verdad — **no editar `project.pbxproj`**, basta crear
 el archivo en la carpeta correcta.
 
@@ -69,6 +71,7 @@ Carga async en `.task { await viewModel.load() }`.
 | Wiring / DI | `Features/<F>/CompositionRoot/`; `App/TabBarControllerView.swift` para el arranque | `make<X>ViewModel()` en `<Feature>CompositionRoot`; overload `with:` para tests |
 | Test unitario | `SpotifyCloneIATests/` | `SpotifyCloneIATests/Features/<F>/<Sujeto>Tests.swift`; **Swift Testing**, `@testable import SpotifyCloneIA`, repo mock vía overload `with:` |
 | Test de UI | `SpotifyCloneIAUITests/` | `SpotifyCloneIAUITests/<Flujo>UITests.swift`; **XCTest** + `XCUIApplication` |
+| Snapshot test de vista | `SpotifyCloneIATests/Features/<F>/__Snapshots__/` | Test en `SpotifyCloneIATests/Features/<F>/<Vista>SnapshotTests.swift` con `import SnapshotTesting`; `assertSnapshot(of:as:)`, referencia versionada en `__Snapshots__/` |
 | Extensión / utilidad compartida | `Shared/Extensions/` | `Shared/Extensions/<Tipo>+<Qué>.swift` |
 | Código del shell (tab bar, splash, menú) | `App/` | `App/<Nombre>.swift` |
 

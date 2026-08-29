@@ -12,7 +12,7 @@
 |---|---|
 | Plataforma | iOS nativo, **SwiftUI** (`@main struct App`) |
 | Lenguaje / target | Swift 5.0, `IPHONEOS_DEPLOYMENT_TARGET = 18.5`, Xcode 16.x |
-| Dependencias | **Ninguna.** Sin SPM, sin CocoaPods. Capa de red propia (`Shared/Networking/`). |
+| Dependencias | **Ninguna en el target de la app.** Sin SPM, sin CocoaPods en `SpotifyCloneIA`. Capa de red propia (`Shared/Networking/`). Excepción: `swift-snapshot-testing` (SPM) agregado *solo* al target `SpotifyCloneIATests`, para snapshot testing de vistas. |
 | Arquitectura | **Clean Architecture + MVVM, por feature** |
 | Proyecto Xcode | `PBXFileSystemSynchronizedRootGroup`: el filesystem manda — **no hay que editar `project.pbxproj`** para agregar/mover archivos. |
 | ViewModels | `@Observable final class`, use cases inyectados por `init` |
@@ -25,7 +25,7 @@
 | Target | Carpeta | Framework de test |
 |---|---|---|
 | `SpotifyCloneIA` | `SpotifyCloneIA/` | — |
-| `SpotifyCloneIATests` | `SpotifyCloneIATests/` | **Swift Testing** (`import Testing`, `@Test`) — usa `@testable import SpotifyCloneIA` |
+| `SpotifyCloneIATests` | `SpotifyCloneIATests/` | **Swift Testing** (`import Testing`, `@Test`) — usa `@testable import SpotifyCloneIA`. Snapshot tests con `SnapshotTesting` (SPM, único paquete externo del repo, solo en este target). Referencias en `__Snapshots__/` junto a cada test. |
 | `SpotifyCloneIAUITests` | `SpotifyCloneIAUITests/` | **XCTest** (`XCUIApplication`) |
 
 ---
@@ -49,7 +49,7 @@ SpotifyCloneIA/
 │   └── Networking/                   # Endpoint, HTTPClient, HTTPMethod,
 │                                     #   URLSessionHTTPClient, RequestMaker, ErrorResolver
 │
-├── Features/<Feature>/               # Home · Library · Login · Player · Search
+├── Features/<Feature>/               # Home · Library · Login · Player · Playlist · Search
 │   ├── Domain/{Entities, Repositories, UseCases}
 │   ├── Data/{DataSources, DTOs, Repositories, Mock/*.json}
 │   ├── Presentation/{ViewModels, Models, Views/{Components|Subviews|Section}}
@@ -70,8 +70,18 @@ SpotifyCloneIAApp → SplashScreenView → RootView → TabBarControllerView
                                                     └── Library → LibraryView() → LibraryCompositionRoot.shared
 ```
 
-> El Player todavía no tiene un "now playing" real: se abre con un botón temporal
-> en el header de Home (`fullScreenCover` → `PlayerCompositionRoot.shared.makePlayerView()`).
+> Los `NavigationStack` de Home y Library registran
+> `.navigationDestination(for: PlaylistRoute.self)` →
+> `PlaylistCompositionRoot.shared.makePlaylistView(playlistID:)`. `LibraryView`
+> empuja el detalle con `NavigationLink(value: PlaylistRoute(id:))` (por ahora
+> cualquier item de la Library abre la misma playlist mock).
+
+> El Player se abre a pantalla completa (`fullScreenCover` →
+> `PlayerCompositionRoot.shared.makePlayerView()`) desde el botón Play de
+> `PlaylistView` y desde el botón temporal del header de Home. La reproducción la
+> maneja un `PlaybackController` simulado (singleton en `PlayerCompositionRoot`,
+> avanza la posición con un timer, sin audio real). Todavía no hay barra "now
+> playing" persistente.
 
 ---
 
@@ -183,6 +193,19 @@ divergían del patrón y había colores/fuentes/assets fuera del asset catalog �
 `git log` de esa rama para el detalle.
 
 **Pendiente / aceptado como excepción:**
+- **`Track` es canónica del feature `Player`** (`Domain/Entities/Track.swift`,
+  `Identifiable`+`Equatable`, con `album`/`durationSeconds`/`isExplicit`) y el feature
+  `Playlist` la reutiliza — junto con `TrackDTO`. Mismo criterio que `Library` reusando
+  `HorizontalCardView` de `Home`: se evita duplicar el tipo (colisionaría a nivel de módulo).
+- **`PlaybackController`** vive en `Features/Player/Presentation/` (servicio de presentación
+  `@Observable`, no capa Domain): mantiene cola + `PlaybackState` y simula avance con timer.
+  `PlayerViewModel` sólo expone estado derivado.
+- `ArtworkImage` (`Shared/DesignSystem/`) es el wrapper cross-feature para portadas
+  (asset local → URL remota → placeholder). Nuevo componente compartido.
+- `PlayerView` y `PlaylistView` fijan `.preferredColorScheme(.dark)`: sus superficies son
+  siempre oscuras y varias col-sets de texto (`textPrimary`, …) sólo dan contraste correcto
+  en dark. El resto de la app asume lo mismo pero no lo fija — revisar si algún día se
+  soporta light mode de verdad.
 - `App/UserMenu/` es una pantalla con ViewModel pero sin capa Domain/Data (es un overlay puro).
 - El asset `darkText` colisiona con el símbolo `UIColor.darkText` (warning del compilador) — renombrar si molesta.
 - No hay tests reales todavía (solo las plantillas).
@@ -193,3 +216,8 @@ divergían del patrón y había colores/fuentes/assets fuera del asset catalog �
   `LibraryItemModel`.
 - Los `#Preview` de las section views de Home usan `.previewLayout` (warning:
   ignorado dentro de `#Preview`) — preexistente.
+- **Excepción a "sin dependencias":** se agregó `swift-snapshot-testing` (Point-Free) vía SPM,
+  vinculado únicamente al target `SpotifyCloneIATests`, para poder hacer snapshot testing de
+  vistas SwiftUI. No se agregó a los targets `SpotifyCloneIA` ni `SpotifyCloneIAUITests`. Las
+  imágenes de referencia viven en `__Snapshots__/` junto a cada archivo de test y se versionan
+  en git.

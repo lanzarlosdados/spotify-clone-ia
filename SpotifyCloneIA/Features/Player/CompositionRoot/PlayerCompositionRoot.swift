@@ -9,18 +9,21 @@ final class PlayerCompositionRoot {
 
     static let shared = PlayerCompositionRoot()
 
+    /// Shared, app-wide playback engine. Playlist (and any future "now playing" bar)
+    /// drive playback through this instance.
+    let playbackController = PlaybackController()
+
     private init() {
-        // Debug log for easier debugging.
         print("🏗️ PlayerCompositionRoot: Initialized.")
     }
 
     // MARK: - Factory Methods
 
-    /// Creates a PlayerViewModel with all dependencies injected.
     func makePlayerViewModel() -> PlayerViewModel {
-        let repository = makeRepository()
-        let useCase = GetCurrentlyPlayingTrackUseCase(playerRepository: repository)
-        return PlayerViewModel(getCurrentlyPlayingTrackUseCase: useCase)
+        PlayerViewModel(
+            controller: playbackController,
+            getCurrentlyPlayingTrackUseCase: GetCurrentlyPlayingTrackUseCase(playerRepository: makeRepository())
+        )
     }
 
     /// Creates the repository implementation.
@@ -29,13 +32,27 @@ final class PlayerCompositionRoot {
     private func makeRepository() -> PlayerRepositoryProtocol {
         DefaultPlayerRepository(dataSource: MockPlayerDataSource())
     }
+
+    // MARK: - Testing Support
+
+    /// Creates a `PlayerViewModel` with a custom repository (and optionally a fresh
+    /// controller) for testing.
+    static func makePlayerViewModel(
+        with repository: PlayerRepositoryProtocol,
+        controller: PlaybackController = PlaybackController()
+    ) -> PlayerViewModel {
+        PlayerViewModel(
+            controller: controller,
+            getCurrentlyPlayingTrackUseCase: GetCurrentlyPlayingTrackUseCase(playerRepository: repository)
+        )
+    }
 }
 
 // MARK: - Convenience Extension
 
 extension PlayerCompositionRoot {
 
-    /// Creates a fully configured PlayerView.
+    /// Creates a fully configured `PlayerView`.
     func makePlayerView() -> PlayerView {
         PlayerView(viewModel: makePlayerViewModel())
     }

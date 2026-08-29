@@ -1,59 +1,85 @@
 import Foundation
 
 // MARK: - PlayerViewModel
-/// View model for the Player screen.
-/// Annotated with @Observable for reactive SwiftUI views.
+/// View model for the full-screen Player. Exposes display-ready state derived from
+/// the shared `PlaybackController` and forwards user intent back to it.
 @Observable
 final class PlayerViewModel {
 
-    // MARK: - Properties
+    // MARK: - Dependencies
 
-    var track: Track?
-    var isLoading = false
-    var errorMessage: String?
-
-    // MARK: - Use Cases
-
+    private let controller: PlaybackController
     private let getCurrentlyPlayingTrackUseCase: GetCurrentlyPlayingTrackUseCase
 
-    // MARK: - Initialization
+    // MARK: - Own state
 
-    init(getCurrentlyPlayingTrackUseCase: GetCurrentlyPlayingTrackUseCase) {
+    var errorMessage: String?
+
+    // MARK: - Init
+
+    init(controller: PlaybackController, getCurrentlyPlayingTrackUseCase: GetCurrentlyPlayingTrackUseCase) {
+        self.controller = controller
         self.getCurrentlyPlayingTrackUseCase = getCurrentlyPlayingTrackUseCase
-
-        // Debug log for easier debugging.
         print("🎯 PlayerViewModel: Initialized.")
     }
 
-    // MARK: - Public Methods
+    // MARK: - Derived display state
 
-    /// Loads the currently playing track.
+    var track: Track? { controller.currentTrack }
+    var contextLabel: String { controller.context.isEmpty ? "PLAYING" : controller.context }
+    var contextTitle: String { controller.contextTitle }
+    var isPlaying: Bool { controller.state.isPlaying }
+    var isShuffled: Bool { controller.state.isShuffled }
+    var repeatMode: RepeatMode { controller.state.repeatMode }
+    var isLiked: Bool { controller.isCurrentTrackLiked }
+
+    private var positionSeconds: Double { controller.state.positionSeconds }
+    private var durationSeconds: Double { Double(controller.currentTrack?.durationSeconds ?? 0) }
+
+    var progress: Double {
+        guard durationSeconds > 0 else { return 0 }
+        return min(max(0, positionSeconds / durationSeconds), 1)
+    }
+
+    var elapsedText: String { Self.timeString(positionSeconds) }
+    var durationText: String { Self.timeString(durationSeconds) }
+
+    // MARK: - Lifecycle
+
+    /// Ensures there is a track to show. If the player was opened cold (no queue),
+    /// fetches the "currently playing" track from the repository as a fallback.
     func load() async {
-        await MainActor.run {
-            isLoading = true
-            errorMessage = nil
-        }
+        guard controller.currentTrack == nil else { return }
 
-        // Debug log for easier debugging.
-        print("🔄 PlayerViewModel: Loading currently playing track...")
-
+        print("🔄 PlayerViewModel: No active queue, fetching fallback track...")
         do {
             let track = try await getCurrentlyPlayingTrackUseCase.execute()
-            await MainActor.run {
-                self.track = track
-                isLoading = false
-            }
-
-            // Debug log for easier debugging.
-            print("✅ PlayerViewModel: Loaded '\(track.title)'.")
+            await MainActor.run { controller.seedIfNeeded(with: track) }
+            print("✅ PlayerViewModel: Seeded with '\(track.title)'.")
         } catch {
-            await MainActor.run {
-                errorMessage = error.localizedDescription
-                isLoading = false
-            }
-
-            // Debug log for easier debugging.
-            print("❌ PlayerViewModel: Error loading track - \(error.localizedDescription)")
+            await MainActor.run { errorMessage = error.localizedDescription }
+            print("❌ PlayerViewModel: Error loading fallback track - \(error.localizedDescription)")
         }
+    }
+
+    // MARK: - Intent
+
+    func togglePlayPause() { controller.togglePlayPause() }
+    func next() { controller.next() }
+    func previous() { controller.previous() }
+    func toggleShuffle() { controller.toggleShuffle() }
+    func cycleRepeat() { controller.cycleRepeat() }
+    func toggleLike() { controller.toggleLike() }
+
+    /// `fraction` is 0...1 along the seek bar.
+    func seek(toFraction fraction: Double) {
+        controller.seek(to: fraction * durationSeconds)
+    }
+
+    // MARK: - Helpers
+
+    static func timeString(_ seconds: Double) -> String {
+        let total = max(0, Int(seconds.rounded()))
+        return String(format: "%d:%02d", total / 60, total % 60)
     }
 }
