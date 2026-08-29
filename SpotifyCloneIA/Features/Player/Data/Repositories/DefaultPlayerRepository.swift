@@ -1,6 +1,6 @@
 import Foundation
 
-final class DefaultPlayerRepository: PlayerRepository {
+final class DefaultPlayerRepository: PlayerRepositoryProtocol {
     private let dataSource: PlayerDataSource
 
     init(dataSource: PlayerDataSource) {

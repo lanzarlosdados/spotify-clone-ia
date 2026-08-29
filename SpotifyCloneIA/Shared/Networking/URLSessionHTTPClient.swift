@@ -1,5 +1,5 @@
 //
-//  URLSessionHTTPCLient.swift
+//  URLSessionHTTPClient.swift
 //  SpotifyCloneIA
 //
 //  Created by Fabian Zarate on 4/9/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class URLSessionHTTPCLient: HTTPCLient {
+class URLSessionHTTPClient: HTTPClient {
     private let session: URLSession
     private let requestMaker: URLSessionRequestMaker
     private let errorResolver: URLSessionErrorResolver

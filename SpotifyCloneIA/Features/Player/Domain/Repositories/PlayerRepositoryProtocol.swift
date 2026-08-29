@@ -1,5 +1,5 @@
 import Foundation
 
-protocol PlayerRepository {
+protocol PlayerRepositoryProtocol {
     func getCurrentlyPlayingTrack() async -> Result<Track, Error>
 }

@@ -1,5 +1,5 @@
 //
-//  FigmaSplashScreenView.swift
+//  SplashScreenView.swift
 //  SpotifyCloneIA
 //
 //  Created by fabian zarate on 05/09/2025.
@@ -47,7 +47,7 @@ struct SplashScreenView: View {
             }
         }
         .fullScreenCover(isPresented: $isActive) {
-            ContentView()
+            RootView()
         }
     }
 }

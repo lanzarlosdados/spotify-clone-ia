@@ -1,9 +1,9 @@
 import Foundation
 
 final class GetCurrentlyPlayingTrackUseCase {
-    private let playerRepository: PlayerRepository
+    private let playerRepository: PlayerRepositoryProtocol
 
-    init(playerRepository: PlayerRepository) {
+    init(playerRepository: PlayerRepositoryProtocol) {
         self.playerRepository = playerRepository
     }
 
