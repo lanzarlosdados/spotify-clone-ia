@@ -26,7 +26,7 @@ struct TabBarControllerView: View {
         TabView(selection: $tabBarViewModel.selectedTab) {
             // Home Tab - NavigationStack for future detail navigation
             NavigationStack {
-                HomeView()
+                PlayerCompositionRoot.createPlayerView()
             }
             .tabItem {
                 TabBarItem(
