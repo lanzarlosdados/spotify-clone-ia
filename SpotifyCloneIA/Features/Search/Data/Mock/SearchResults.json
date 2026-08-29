@@ -1,0 +1,6 @@
+[
+  { "id": "1", "title": "Radiohead",        "subtitle": "Artist",                      "image_url": null, "type": "artist" },
+  { "id": "2", "title": "OK Computer",      "subtitle": "Radiohead • Album",            "image_url": null, "type": "album" },
+  { "id": "3", "title": "Paranoid Android", "subtitle": "Radiohead • OK Computer",       "image_url": null, "type": "track" },
+  { "id": "4", "title": "Rock Classics",    "subtitle": "Playlist • 150 songs",          "image_url": null, "type": "playlist" }
+]

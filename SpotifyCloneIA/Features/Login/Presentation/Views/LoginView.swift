@@ -3,8 +3,12 @@ import SwiftUI
 // MARK: - Login View
 struct LoginView: View {
     // MARK: - Properties
-    let viewModel = LoginViewModel()
-    
+    let viewModel: LoginViewModel
+
+    init(viewModel: LoginViewModel? = nil) {
+        self.viewModel = viewModel ?? LoginCompositionRoot.shared.makeLoginViewModel()
+    }
+
     private let screenWidth: CGFloat = 390
     private let screenHeight: CGFloat = 844
     private let contentBottomPadding: CGFloat = 48

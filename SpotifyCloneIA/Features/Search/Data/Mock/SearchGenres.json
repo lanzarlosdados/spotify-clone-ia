@@ -1,0 +1,5 @@
+[
+  { "id": "1", "name": "Permanent Wave", "hashtag": "#permanent wave", "image_url": "thumb-verticale" },
+  { "id": "2", "name": "Madchester",     "hashtag": "#madchester",     "image_url": "thumb-verticale-1" },
+  { "id": "3", "name": "Dance Rock",     "hashtag": "#dance rock",     "image_url": "thumb-verticale-2" }
+]

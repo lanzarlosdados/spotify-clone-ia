@@ -1,0 +1,69 @@
+{
+  "content_grid": [
+    { "id": "1", "image_name": "card-slim-7", "title": "OK Computer", "has_notification": true },
+    { "id": "2", "image_name": "card-slim-2", "title": "Blur: the best of", "has_notification": false },
+    { "id": "3", "image_name": "card-slim-3", "title": "Govinda", "has_notification": false },
+    { "id": "4", "image_name": "card-slim-4", "title": "Playlist Viper", "has_notification": false },
+    { "id": "5", "image_name": "card-slim-5", "title": "The last Dinner Party", "has_notification": false },
+    { "id": "6", "image_name": "card-slim-6", "title": "Entering the 3 Body Problem word", "has_notification": false },
+    { "id": "7", "image_name": "card-slim-7", "title": "The last Dinner Party", "has_notification": false },
+    { "id": "8", "image_name": "card-slim-8", "title": "Entering the 3 Body Problem word", "has_notification": false }
+  ],
+  "new_release": {
+    "artist_name": "Arctic Monkeys",
+    "artist_image_name": "artist_avatar",
+    "release_title": "I Wanna Be Yours",
+    "release_subtitle": "Single • Arctic Monkeys",
+    "artwork_image_name": "album_art"
+  },
+  "your_top_mixes": [
+    { "id": "1", "image_name": "rock-mix", "title": "Rock Mix", "subtitle": "Blur, The Killers, Kula Shaker and more" },
+    { "id": "2", "image_name": "pop-mix", "title": "Pop Mix", "subtitle": "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo" },
+    { "id": "3", "image_name": "upbeat-mix", "title": "Upbeat Mix", "subtitle": "The Stokes, Chappell Roan, Talking Heads and more" }
+  ],
+  "recently_played": [
+    { "id": "1", "image_name": "the-cure", "title": "The Cure", "subtitle": "" },
+    { "id": "2", "image_name": "arctic-monkeys", "title": "The View From The Afternoon", "subtitle": "" },
+    { "id": "3", "image_name": "beastie-boys", "title": "Sabotage", "subtitle": "" },
+    { "id": "4", "image_name": "blur", "title": "Blur: the best of", "subtitle": "" }
+  ],
+  "episodes_for_you": [
+    { "id": "1", "image_name": "episode-one", "title": "4th of July Special", "subtitle": "Go! My Favorite Sports Team" },
+    { "id": "2", "image_name": "episode-two", "title": "The Last Great Debate", "subtitle": "Distractible" },
+    { "id": "3", "image_name": "episode-three", "title": "Everyone", "subtitle": "The Dog" }
+  ],
+  "more_like_reference": {
+    "image_name": "solved-murders-mini",
+    "title": "The Black Dahlia Murder P…"
+  },
+  "more_like": [
+    { "id": "1", "image_name": "more-one", "title": "Rock Mix", "subtitle": "Blur, The Killers, Kula Shaker and more" },
+    { "id": "2", "image_name": "more-two", "title": "Pop Mix", "subtitle": "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo" },
+    { "id": "3", "image_name": "more-three", "title": "Upbeat Mix", "subtitle": "The Strokes, Talking Heads and more" }
+  ],
+  "jump_back_in": [
+    { "id": "1", "image_name": "jump-one", "title": "Three Imaginary Boys", "subtitle": "1979 • Album" },
+    { "id": "2", "image_name": "jump-two", "title": "Alternative 80s", "subtitle": "Playlist • Spotify" },
+    { "id": "3", "image_name": "jump-three", "title": "All Souls", "subtitle": "Album • Siouxsie and the Banshees" }
+  ],
+  "recommended_for_today": [
+    { "id": "1", "image_name": "today-one", "title": "Unreal Unearth", "subtitle": "Album • Hozier" },
+    { "id": "2", "image_name": "today-two", "title": "Sinner", "subtitle": "Song • The Last Dinner Party" },
+    { "id": "3", "image_name": "today-three", "title": "OK Computer", "subtitle": "Album • Radiohead" }
+  ],
+  "episode_preview": {
+    "title": "The Black Dahlia Murder Pt.2",
+    "subtitle": "Episode • Solved Murders: True Crime Mysteries",
+    "date_text": "Sep 2023",
+    "duration_text": "46 min",
+    "description_text": "Elizabeth Short’s gruesome murder is the LAPD’s most infamous unsolved case. But there’s one person who thinks he’s cracked it — the alleged killer’s own son. Today, we reopen the case against Geo…",
+    "artwork_name": "solved-murders-podcast",
+    "preview_button_title": "Preview episode"
+  },
+  "trending_album": {
+    "title": "Blur (Special Edition)",
+    "subtitle": "Album • 32 songs, 2 hr 3 min",
+    "artwork_name": "blur-special-edition",
+    "background_image_name": "image-video"
+  }
+}

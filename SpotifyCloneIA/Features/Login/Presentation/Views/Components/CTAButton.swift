@@ -78,8 +78,7 @@ struct CTAButton: View {
                 }
                 
                 Text(title)
-                    .font(.custom("Circular Std", size: 14))
-                    .fontWeight(type == .primary ? .black : .bold)
+                    .font(.circular(type == .primary ? .black : .bold, size: 14))
                     .foregroundColor(textColor)
                     .lineLimit(1)
                 
