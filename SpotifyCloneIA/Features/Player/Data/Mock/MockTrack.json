@@ -1,5 +1,10 @@
 {
-  "title": "There She Goes",
-  "artist": "The La's",
-  "cover_image_url": "https://upload.wikimedia.org/wikipedia/en/e/e4/TheLa%27sTheLa%27s.jpg"
+  "id": "stay-kid-laroi",
+  "title": "STAY (with Justin Bieber)",
+  "artist": "The Kid LAROI, Justin Bieber",
+  "album": "F*CK LOVE 3: OVER YOU",
+  "cover_image_name": "today-two",
+  "cover_image_url": null,
+  "duration_seconds": 216,
+  "is_explicit": true
 }

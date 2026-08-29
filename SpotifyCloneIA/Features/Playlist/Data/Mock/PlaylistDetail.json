@@ -1,0 +1,71 @@
+{
+  "id": "imagine-dragons-mix",
+  "title": "Imagine Dragons Mix",
+  "description": "Tune in to Top Tracks from Imagine Dragons, Alan Walker and many more",
+  "owner_name": "Spotify",
+  "cover_image_name": "rock-mix",
+  "cover_image_url": null,
+  "likes_count": 191165,
+  "is_downloaded": false,
+  "tracks": [
+    {
+      "id": "t1",
+      "title": "Alone",
+      "artist": "Alan Walker",
+      "album": "Alone",
+      "cover_image_name": "upbeat-mix",
+      "duration_seconds": 161,
+      "is_explicit": false
+    },
+    {
+      "id": "t2",
+      "title": "Let me love you",
+      "artist": "Justin Bieber feat DJ Snake",
+      "cover_image_name": "pop-mix",
+      "duration_seconds": 205,
+      "is_explicit": false
+    },
+    {
+      "id": "t3",
+      "title": "Ignite",
+      "artist": "Alan Walker",
+      "cover_image_name": "card-slim-3",
+      "duration_seconds": 213,
+      "is_explicit": false
+    },
+    {
+      "id": "t4",
+      "title": "Taki Taki",
+      "artist": "DJ Snake feat Selena Gomez",
+      "cover_image_name": "card-slim-5",
+      "duration_seconds": 232,
+      "is_explicit": true
+    },
+    {
+      "id": "t5",
+      "title": "Believer",
+      "artist": "Imagine Dragons",
+      "album": "Evolve",
+      "cover_image_name": "arctic-monkeys",
+      "duration_seconds": 204,
+      "is_explicit": false
+    },
+    {
+      "id": "t6",
+      "title": "Faded",
+      "artist": "Alan Walker",
+      "cover_image_name": "the-cure",
+      "duration_seconds": 212,
+      "is_explicit": false
+    },
+    {
+      "id": "t7",
+      "title": "Thunder",
+      "artist": "Imagine Dragons",
+      "album": "Evolve",
+      "cover_image_name": "blur",
+      "duration_seconds": 187,
+      "is_explicit": false
+    }
+  ]
+}

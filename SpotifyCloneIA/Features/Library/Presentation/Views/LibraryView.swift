@@ -197,28 +197,28 @@ struct LibraryView: View {
         ScrollView {
             LazyVGrid(columns: gridColumns, spacing: gridSpacing) {
                 ForEach(viewModel.displayedItems) { item in
-                    // Reutilizando HorizontalCardView con tamaños personalizados para grid
-                    HorizontalCardView(
-                        imageName: item.imageName,
-                        title: item.title,
-                        description: item.description,
-                        imageSize: libraryItemImageSize,
-                        cardSize: libraryItemCardSize,
-                        showDescription: true
-                    )
-                    .onTapGesture {
-                        // Debug log for easier debugging.
-                        print("📱 LibraryView: Tapped item: \(item.title)")
-                        // TODO: Navigate to item detail
+                    // Reutilizando HorizontalCardView con tamaños personalizados para grid.
+                    // Tap → push del detalle de playlist; long press → pin (comportamiento previo).
+                    NavigationLink(value: PlaylistRoute(id: item.id)) {
+                        HorizontalCardView(
+                            imageName: item.imageName,
+                            title: item.title,
+                            description: item.description,
+                            imageSize: libraryItemImageSize,
+                            cardSize: libraryItemCardSize,
+                            showDescription: true
+                        )
                     }
-                    .onLongPressGesture {
-                        // Debug log for easier debugging.
-                        print("📌 LibraryView: Long press on item: \(item.title)")
-                        // Toggle pin on long press
-                        Task {
-                            await viewModel.togglePin(for: item.id)
+                    .buttonStyle(.plain)
+                    .simultaneousGesture(
+                        LongPressGesture().onEnded { _ in
+                            // Debug log for easier debugging.
+                            print("📌 LibraryView: Long press on item: \(item.title)")
+                            Task {
+                                await viewModel.togglePin(for: item.id)
+                            }
                         }
-                    }
+                    )
                 }
             }
             .padding(.horizontal, headerPadding)
