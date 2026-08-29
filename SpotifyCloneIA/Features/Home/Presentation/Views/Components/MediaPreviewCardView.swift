@@ -44,9 +44,9 @@ struct MediaPreviewCardView: View {
     private let contentBottomPadding: CGFloat = 12
     
     // Base color (hex 324B5C)
-    private let baseCardColor = Color(red: 50/255, green: 75/255, blue: 92/255)
+    private let baseCardColor = Color.mediaCardBase
     // Tono un poco más oscuro para dar profundidad en el gradiente
-    private let darkerCardColor = Color(red: 38/255, green: 57/255, blue: 70/255)
+    private let darkerCardColor = Color.mediaCardDark
     
     init(
         title: String = "The Black Dahlia Murder Pt.2",

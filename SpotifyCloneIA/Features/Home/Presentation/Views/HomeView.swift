@@ -37,7 +37,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color("#121212").ignoresSafeArea()
+            Color.primaryBackground.ignoresSafeArea()
             HomeView()
         }
         .preferredColorScheme(.dark)

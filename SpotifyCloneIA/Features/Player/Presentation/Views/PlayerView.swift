@@ -5,7 +5,7 @@ struct PlayerView: View {
 
     var body: some View {
         ZStack {
-            Color(red: 18/255, green: 18/255, blue: 18/255).ignoresSafeArea()
+            Color.primaryBackground.ignoresSafeArea()
 
             if viewModel.isLoading {
                 ProgressView()

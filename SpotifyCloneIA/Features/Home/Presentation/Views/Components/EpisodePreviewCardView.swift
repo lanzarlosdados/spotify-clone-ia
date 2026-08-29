@@ -68,7 +68,7 @@ struct EpisodePreviewCardView: View {
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color.black.opacity(0.55),
-                    Color(red: 55/255, green: 86/255, blue: 102/255).opacity(0.9)
+                    Color.episodeCardOverlay.opacity(0.9)
                 ]),
                 startPoint: .top,
                 endPoint: .bottom

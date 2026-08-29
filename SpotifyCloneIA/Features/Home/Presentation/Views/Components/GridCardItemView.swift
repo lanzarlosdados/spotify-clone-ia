@@ -35,7 +35,7 @@ struct GridCardItemView: View {
             
             Spacer()
         }
-        .background(Color(red: 41/255, green: 41/255, blue: 41/255))
+        .background(Color.cardBackground)
         .cornerRadius(4)
         .frame(height: 56)
     }
