@@ -33,8 +33,8 @@ enum CircularStd: String, CaseIterable {
     case boldItalic    = "CircularStd-BoldItalic"
     case black         = "CircularStd-Black"
     case blackItalic   = "CircularStd-BlackItalic"
-    case light         = "CircularStd-Light"
-    case lightItalic   = "CircularStd-LightItalic" // OJO: algunas distribuciones la muestran como “Light Italic”, pero el PostScript suele ser sin espacio.
+    case light         = "CircularSpotifyText-Light"
+    case lightItalic   = "CircularSpotifyText-LightItalic" // PostScript name real del .otf (familia CircularSpotifyText, verificado con CoreText).
     
     var postScriptName: String { rawValue }
 }

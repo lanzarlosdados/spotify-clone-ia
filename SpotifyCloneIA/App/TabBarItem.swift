@@ -23,7 +23,7 @@ struct TabBarItem: View {
             
             // MARK: - Label
             Text(tab.rawValue)
-                .font(.custom("Circular Std", size: 11))
+                .font(.circular(.book, size: 11))
                 .multilineTextAlignment(.center)
         }
         .frame(width: itemWidth)

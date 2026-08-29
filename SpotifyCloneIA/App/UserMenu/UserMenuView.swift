@@ -64,14 +64,12 @@ struct UserMenuView: View {
             
             VStack(alignment: .leading, spacing: 0) {
                 Text(viewModel.userName)
-                    .font(.custom("Circular Std", size: 19))
-                    .fontWeight(.bold)
+                    .font(.circular(.bold, size: 19))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                
+
                 Text(viewModel.profileSubtitle)
-                    .font(.custom("Circular Std", size: 12))
-                    .fontWeight(.medium)
+                    .font(.circular(.medium, size: 12))
                     .foregroundColor(Color.subtitleText)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -114,8 +112,7 @@ struct UserMenuView: View {
                     .frame(width: 32, height: 32)
                 
                 Text(item.title)
-                    .font(.custom("Circular Std", size: 15))
-                    .fontWeight(.medium)
+                    .font(.circular(.medium, size: 15))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
