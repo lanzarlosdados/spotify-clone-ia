@@ -16,10 +16,10 @@ struct TabBarControllerView: View {
     init(tabBarViewModel: TabBarViewModel) {
         self.tabBarViewModel = tabBarViewModel
         
-        // Crear SearchViewModel usando la factory (Composition Root pattern)
+        // Crear SearchViewModel usando el Composition Root del feature
         // Debug log for easier debugging.
-        print("🎬 TabBarControllerView: Initializing with SearchFactory...")
-        self.searchViewModel = SearchFactory.shared.makeSearchViewModel()
+        print("🎬 TabBarControllerView: Initializing with SearchCompositionRoot...")
+        self.searchViewModel = SearchCompositionRoot.shared.makeSearchViewModel()
     }
     
     var body: some View {

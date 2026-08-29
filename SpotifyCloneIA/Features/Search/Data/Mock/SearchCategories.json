@@ -1,0 +1,22 @@
+[
+  { "id": "1",  "title": "Music",        "background_color": "#DC148C", "image_url": null },
+  { "id": "2",  "title": "Podcast",      "background_color": "#006450", "image_url": null },
+  { "id": "3",  "title": "Live Events",  "background_color": "#8400E7", "image_url": null },
+  { "id": "4",  "title": "Made for You", "background_color": "#1E3264", "image_url": null },
+  { "id": "5",  "title": "New Releases", "background_color": "#E13300", "image_url": null },
+  { "id": "6",  "title": "Pop",          "background_color": "#148EE0", "image_url": null },
+  { "id": "7",  "title": "Hipop",        "background_color": "#BA5D07", "image_url": null },
+  { "id": "8",  "title": "Charts",       "background_color": "#8D67AB", "image_url": null },
+  { "id": "9",  "title": "Country",      "background_color": "#E8115B", "image_url": null },
+  { "id": "10", "title": "Rock",         "background_color": "#DC148C", "image_url": null },
+  { "id": "11", "title": "Latin",        "background_color": "#E13300", "image_url": null },
+  { "id": "12", "title": "Workout",      "background_color": "#777777", "image_url": null },
+  { "id": "13", "title": "Discover",     "background_color": "#8D67AB", "image_url": null },
+  { "id": "14", "title": "Concert",      "background_color": "#E8115B", "image_url": null },
+  { "id": "15", "title": "Disney",       "background_color": "#27856A", "image_url": null },
+  { "id": "16", "title": "At Home",      "background_color": "#8C67AB", "image_url": null },
+  { "id": "17", "title": "Chill",        "background_color": "#E80F5C", "image_url": null },
+  { "id": "18", "title": "Indie",        "background_color": "#B16138", "image_url": null },
+  { "id": "19", "title": "Decades",      "background_color": "#DC148C", "image_url": null },
+  { "id": "20", "title": "Summer",       "background_color": "#148EE0", "image_url": null }
+]

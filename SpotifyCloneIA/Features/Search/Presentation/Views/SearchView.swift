@@ -165,8 +165,5 @@ struct SearchView: View {
 // MARK: - Preview
 
 #Preview {
-    // Create SearchViewModel using the factory
-    let viewModel = SearchFactory.shared.makeSearchViewModel()
-    
-    return SearchView(viewModel: viewModel)
+    SearchView(viewModel: SearchCompositionRoot.shared.makeSearchViewModel())
 }
