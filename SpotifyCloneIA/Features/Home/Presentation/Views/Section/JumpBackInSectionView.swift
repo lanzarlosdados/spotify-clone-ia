@@ -7,11 +7,7 @@ struct JumpBackInSectionView: View {
 
     init(
         title: String = "Jump back in",
-        items: [HorizontalCardItem] = [
-            HorizontalCardItem(imageName: "jump-one", title: "Three Imaginary Boys", description: "1979 • Album"),
-            HorizontalCardItem(imageName: "jump-two", title: "Alternative 80s", description: "Playlist • Spotify"),
-            HorizontalCardItem(imageName: "jump-three", title: "All Souls", description: "Album • Siouxsie and the Banshees")
-        ],
+        items: [HorizontalCardItem],
         onSelect: @escaping (HorizontalCardItem) -> Void = { _ in }
     ) {
         self.title = title
@@ -40,9 +36,11 @@ struct JumpBackInSectionView: View {
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        JumpBackInSectionView()
+        JumpBackInSectionView(items: [
+            HorizontalCardItem(imageName: "jump-one", title: "Three Imaginary Boys", description: "1979 • Album"),
+            HorizontalCardItem(imageName: "jump-two", title: "Alternative 80s", description: "Playlist • Spotify")
+        ])
     }
     .preferredColorScheme(.dark)
-    .previewLayout(.sizeThatFits)
 }
 #endif

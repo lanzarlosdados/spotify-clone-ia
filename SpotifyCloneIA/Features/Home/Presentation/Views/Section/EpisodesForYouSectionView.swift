@@ -7,11 +7,7 @@ struct EpisodesForYouSectionView: View {
 
     init(
         title: String = "Episodes for you",
-        items: [HorizontalCardItem] = [
-            HorizontalCardItem(imageName: "episode-one", title: "4th of July Special", description: "Go! My Favorite Sports Team"),
-            HorizontalCardItem(imageName: "episode-two", title: "The Last Great Debate", description: "Distractible"),
-            HorizontalCardItem(imageName: "episode-three", title: "Everyone", description: "The Dog")
-        ],
+        items: [HorizontalCardItem],
         onSelect: @escaping (HorizontalCardItem) -> Void = { _ in }
     ) {
         self.title = title
@@ -41,7 +37,10 @@ struct EpisodesForYouSectionView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            EpisodesForYouSectionView()
+            EpisodesForYouSectionView(items: [
+                HorizontalCardItem(imageName: "episode-one", title: "4th of July Special", description: "Go! My Favorite Sports Team"),
+                HorizontalCardItem(imageName: "episode-two", title: "The Last Great Debate", description: "Distractible")
+            ])
         }
         .preferredColorScheme(.dark)
         .previewLayout(.sizeThatFits)

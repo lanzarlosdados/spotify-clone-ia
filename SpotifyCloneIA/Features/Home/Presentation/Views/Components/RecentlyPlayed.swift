@@ -1,15 +1,12 @@
 import SwiftUI
 
 struct RecentlyPlayed: View {
+    let items: [HorizontalCardItem]
+
     var body: some View {
         HorizontalCardsSectionView(
             title: "Recently played",
-            items: [
-                HorizontalCardItem(imageName: "the-cure", title: "The Cure", description: ""),
-                HorizontalCardItem(imageName: "arctic-monkeys", title: "The View From The Afternoon", description: ""),
-                HorizontalCardItem(imageName: "beastie-boys", title: "Sabotage", description: ""),
-                HorizontalCardItem(imageName: "blur", title: "Blur: the best of", description: "")
-            ],
+            items: items,
             showTitle: true,
             interItemSpacing: 16,
             horizontalPadding: 16,
@@ -27,8 +24,11 @@ struct RecentlyPlayed_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            RecentlyPlayed()
-                .padding()
+            RecentlyPlayed(items: [
+                HorizontalCardItem(imageName: "the-cure", title: "The Cure", description: ""),
+                HorizontalCardItem(imageName: "blur", title: "Blur: the best of", description: "")
+            ])
+            .padding()
         }
         .preferredColorScheme(.dark)
         .previewLayout(.sizeThatFits)

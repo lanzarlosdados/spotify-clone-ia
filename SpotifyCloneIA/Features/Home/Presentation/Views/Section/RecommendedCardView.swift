@@ -1,41 +1,41 @@
 import SwiftUI
 
 struct RecommendedCardView: View {
+    let release: NewRelease
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             // MARK: - Header
             HStack(spacing: 12) {
-                Image("artist_avatar")
+                Image(release.artistImageName)
                     .resizable()
                     .frame(width: 48, height: 48)
                     .clipShape(Circle())
-                
+
                 VStack(alignment: .leading, spacing: 4) {
                     Text("New release from")
                         .font(.custom("CircularStd-Book", size: 12))
                         .foregroundColor(Color.textSecondary)
-                    Text("Arctic Monkeys")
+                    Text(release.artistName)
                         .font(.custom("CircularStd-Bold", size: 22))
                         .foregroundColor(Color.textPrimary)
                         .kerning(-0.55)
                 }
                 Spacer()
             }
-            
+
             // MARK: - Card
             HStack(spacing: 16) {
-                // MARK: - TODO
-
-                Image("album_art")
+                Image(release.artworkImageName)
                     .resizable()
                     .frame(width: 142, height: 142)
-                
+
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
-                        Text("I Wanna Be Yours")
+                        Text(release.releaseTitle)
                             .font(.custom("CircularStd-Bold", size: 12))
                             .foregroundColor(Color.textPrimary)
-                        Text("Single • Arctic Monkeys")
+                        Text(release.releaseSubtitle)
                             .font(.custom("CircularStd-Book", size: 12))
                             .foregroundColor(Color.textTertiary)
                     }
@@ -77,9 +77,15 @@ struct RecommendedCardView: View {
 #if DEBUG
 struct RecommendedCardView_Previews: PreviewProvider {
     static var previews: some View {
-        RecommendedCardView()
-            .preferredColorScheme(.dark)
-            .previewLayout(.sizeThatFits)
+        RecommendedCardView(release: NewRelease(
+            artistName: "Arctic Monkeys",
+            artistImageName: "artist_avatar",
+            releaseTitle: "I Wanna Be Yours",
+            releaseSubtitle: "Single • Arctic Monkeys",
+            artworkImageName: "album_art"
+        ))
+        .preferredColorScheme(.dark)
+        .previewLayout(.sizeThatFits)
     }
 }
 #endif

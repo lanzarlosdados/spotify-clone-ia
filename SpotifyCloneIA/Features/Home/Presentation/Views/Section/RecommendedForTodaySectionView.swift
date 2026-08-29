@@ -7,11 +7,7 @@ struct RecommendedForTodaySectionView: View {
 
     init(
         title: String = "Raccomanded for today",
-        items: [HorizontalCardItem] = [
-            HorizontalCardItem(imageName: "today-one", title: "Unreal Unearth", description: "Album • Hozier"),
-            HorizontalCardItem(imageName: "today-two", title: "Sinner", description: "Song • The Last Dinner Party"),
-            HorizontalCardItem(imageName: "today-three", title: "OK Computer", description: "Album • Radiohead")
-        ],
+        items: [HorizontalCardItem],
         onSelect: @escaping (HorizontalCardItem) -> Void = { _ in }
     ) {
         self.title = title
@@ -40,9 +36,11 @@ struct RecommendedForTodaySectionView: View {
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        RecommendedForTodaySectionView()
+        RecommendedForTodaySectionView(items: [
+            HorizontalCardItem(imageName: "today-one", title: "Unreal Unearth", description: "Album • Hozier"),
+            HorizontalCardItem(imageName: "today-two", title: "Sinner", description: "Song • The Last Dinner Party")
+        ])
     }
     .preferredColorScheme(.dark)
-    .previewLayout(.sizeThatFits)
 }
 #endif

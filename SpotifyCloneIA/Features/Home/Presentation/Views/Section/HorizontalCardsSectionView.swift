@@ -73,7 +73,7 @@ struct HorizontalCardsSectionView<Header: View>: View {
     // Conveniencia: sin header custom -> usa Text(title)
     init(
         title: String = "Your top mixes",
-        items: [HorizontalCardItem] = HorizontalCardsSectionView.sampleItems,
+        items: [HorizontalCardItem],
         showTitle: Bool = true,
         interItemSpacing: CGFloat = 16,
         horizontalPadding: CGFloat = 16,
@@ -138,30 +138,24 @@ struct HorizontalCardsSectionView<Header: View>: View {
 }
 
 
-// MARK: - Mocks
-private extension HorizontalCardsSectionView {
-    static var sampleItems: [HorizontalCardItem] {
-        [
-            HorizontalCardItem(imageName: "rock-mix", title: "Rock Mix", description: "Blur, The Killers, Kula Shaker and more"),
-            HorizontalCardItem(imageName: "pop-mix", title: "Pop Mix", description: "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo"),
-            HorizontalCardItem(imageName: "upbeat-mix", title: "Upbeat Mix", description: "The Stokes, Chappell Roan, Talking Heads and more")
-        ]
-    }
-}
-
 #if DEBUG
+private let horizontalCardsPreviewItems: [HorizontalCardItem] = [
+    HorizontalCardItem(imageName: "rock-mix", title: "Rock Mix", description: "Blur, The Killers, Kula Shaker and more"),
+    HorizontalCardItem(imageName: "pop-mix", title: "Pop Mix", description: "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo")
+]
+
 struct HorizontalCardsSectionView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             // Preview con init de conveniencia
-            HorizontalCardsSectionView<EmptyView>()
+            HorizontalCardsSectionView<EmptyView>(items: horizontalCardsPreviewItems)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-            
+
             // Preview con header compuesto (similar a tus capturas)
             HorizontalCardsSectionView(
                 title: "The Black Dahlia Murder P…",
-                items: HorizontalCardsSectionView<EmptyView>.sampleItems,
+                items: horizontalCardsPreviewItems,
                 showTitle: false, // lo maneja el header custom
                 interItemSpacing: 12,
                 horizontalPadding: 20,

@@ -1,18 +1,17 @@
 import SwiftUI
 
 // MARK: - HomeContentGridView
-/// Componente que muestra una grilla de contenido para la pantalla Home.
-/// Aplicando reglas: SwiftUI, Simple solutions, Clean codebase, Debug logs & comments
+/// A 2-column grid of compact cards for the top of the Home screen.
 struct HomeContentGridView: View {
 
     // MARK: - Properties
-    @State private var viewModel = HomeContentGridViewModel()
+    let items: [ContentGridItem]
 
     // MARK: - Body
     var body: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8) {
-            ForEach(viewModel.cardViewModels) { cardViewModel in
-                CardSlimView(viewModel: cardViewModel)
+            ForEach(items) { item in
+                CardSlimView(viewModel: item.cardSlimViewModel)
             }
         }
         .padding(.horizontal, 16)
@@ -21,6 +20,9 @@ struct HomeContentGridView: View {
 
 // MARK: - Preview
 #Preview {
-    HomeContentGridView()
-        .background(Color.backgroundApp)
+    HomeContentGridView(items: [
+        ContentGridItem(id: "1", imageName: "card-slim-1", title: "OK Computer", hasNotification: true),
+        ContentGridItem(id: "2", imageName: "card-slim-2", title: "Blur: the best of", hasNotification: false)
+    ])
+    .background(Color.backgroundApp)
 }

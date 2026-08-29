@@ -8,9 +8,9 @@ struct MoreLikeSectionView: View {
     let onSelect: (HorizontalCardItem) -> Void
 
     init(
-        referenceImageName: String = "episode-one",
-        referenceTitle: String = "The Black Dahlia Murder P…",
-        items: [HorizontalCardItem] = MoreLikeSectionView.sampleItems,
+        referenceImageName: String,
+        referenceTitle: String,
+        items: [HorizontalCardItem],
         onSelect: @escaping (HorizontalCardItem) -> Void = { _ in }
     ) {
         self.referenceImageName = referenceImageName
@@ -54,24 +54,19 @@ struct MoreLikeSectionView: View {
     }
 }
 
-// MARK: - Datos de ejemplo
-extension MoreLikeSectionView {
-    static var sampleItems: [HorizontalCardItem] {
-        [
-            HorizontalCardItem(imageName: "more-one", title: "Rock Mix", description: "Blur, The Killers, Kula Shaker and more"),
-            HorizontalCardItem(imageName: "more-two", title: "Pop Mix", description: "Sabrina Carpenter, Chappell Roan, Olivia Rodrigo"),
-            HorizontalCardItem(imageName: "more-three", title: "Upbeat Mix", description: "The Strokes, Talking Heads and more")
-        ]
-    }
-}
-
 #if DEBUG
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        MoreLikeSectionView()
+        MoreLikeSectionView(
+            referenceImageName: "solved-murders-mini",
+            referenceTitle: "The Black Dahlia Murder P…",
+            items: [
+                HorizontalCardItem(imageName: "more-one", title: "Rock Mix", description: "Blur, The Killers and more"),
+                HorizontalCardItem(imageName: "more-two", title: "Pop Mix", description: "Sabrina Carpenter, Chappell Roan")
+            ]
+        )
     }
     .preferredColorScheme(.dark)
-    .previewLayout(.sizeThatFits)
 }
 #endif

@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct TrendingAlbumsForYouSectionView: View {
+    let album: TrendingAlbum
+
     var title: String = "Trending albums for you"
     var headerIconName: String = "ico-24-trande"
     
@@ -31,11 +33,11 @@ struct TrendingAlbumsForYouSectionView: View {
             // Card + flechas superpuestas
             ZStack {
                 MediaPreviewVideoCardView(
-                    title: "Blur (Special Edition)",
-                    subtitle: "Album • 32 songs, 2 hr 3 min",
+                    title: album.title,
+                    subtitle: album.subtitle,
                     previewButtonTitle: "Preview album",
-                    backgroundImageName: "image-video",
-                    artworkName: "blur-special-edition",
+                    backgroundImageName: album.backgroundImageName,
+                    artworkName: album.artworkName,
                     plusIconName: "plus_circle",
                     playIconName: "play_icon",
                     previewIconName: "ico-24-sound-off",
@@ -74,8 +76,13 @@ struct TrendingAlbumsForYouSectionView: View {
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        TrendingAlbumsForYouSectionView()
-            .padding()
+        TrendingAlbumsForYouSectionView(album: TrendingAlbum(
+            title: "Blur (Special Edition)",
+            subtitle: "Album • 32 songs, 2 hr 3 min",
+            artworkName: "blur-special-edition",
+            backgroundImageName: "image-video"
+        ))
+        .padding()
     }
     .preferredColorScheme(.dark)
 }
